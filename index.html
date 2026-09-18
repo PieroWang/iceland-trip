@@ -582,122 +582,159 @@
 
   <!-- ===== Map Overview ===== -->
   <div class="section">
-    <div class="section-title"><span class="icon">🗺️</span> 行程总览地图 <span style="font-size:12px;font-weight:normal;color:var(--text-muted);">（参考图，待旅行团确认后更新）</span></div>
+    <div class="section-title"><span class="icon">🗺️</span> 行程总览地图</div>
     <div class="map-card">
       <div class="map-svg-container">
-        <svg viewBox="0 0 500 650" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <filter id="sketchy">
-              <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise"></feTurbulence>
-              <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+            <filter id="sketchy2">
+              <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" result="noise"></feTurbulence>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
             </filter>
+            <marker id="arrow-golden" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#E8B339"></path>
+            </marker>
+            <marker id="arrow-snae" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#4DB6AC"></path>
+            </marker>
+            <marker id="arrow-horse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#81C784"></path>
+            </marker>
+            <marker id="arrow-south" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#5C9EED"></path>
+            </marker>
+            <marker id="arrow-aurora" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9575CD"></path>
+            </marker>
           </defs>
 
-          <!-- Iceland outline (simplified, hand-drawn style) -->
-          <path class="sketch-filter" d="
-            M 120,580
-            C 100,560 95,530 100,500
-            C 90,480 85,450 90,420
-            C 80,390 75,360 85,330
-            C 75,300 70,270 85,240
-            C 75,210 80,180 100,155
-            C 90,130 100,105 125,90
-            C 115,70 130,50 155,45
-            C 165,25 190,15 215,20
-            C 240,10 270,15 295,30
-            C 320,20 345,30 360,50
-            C 385,45 405,60 410,85
-            C 430,95 440,115 435,140
-            C 450,160 450,185 440,210
-            C 450,235 445,260 430,280
-            C 435,305 425,330 405,345
-            C 410,370 400,395 380,410
-            C 385,435 375,460 355,475
-            C 360,500 350,525 330,540
-            C 335,565 325,590 300,605
-            C 290,625 265,635 240,630
-            C 215,640 185,635 165,620
-            C 140,615 125,600 120,580 Z
-          " fill="var(--map-bg)" stroke="#888" stroke-width="1.5" opacity="0.5"></path>
+          <!-- Iceland outline (simplified, hand-drawn style) - smaller, centered -->
+          <path class="sketch-filter" filter="url(#sketchy2)" d="
+            M 140,460
+            C 120,440 115,410 120,380
+            C 110,360 105,330 110,300
+            C 100,270 95,240 105,210
+            C 95,180 100,150 120,125
+            C 110,100 120,75 145,60
+            C 135,40 150,20 175,15
+            C 185,-5 210,-5 235,0
+            C 260,-10 290,-5 315,10
+            C 340,0 365,10 380,30
+            C 405,25 425,40 430,65
+            C 450,75 460,95 455,120
+            C 470,140 470,165 460,190
+            C 470,215 465,240 450,260
+            C 455,285 445,310 425,325
+            C 430,350 420,375 400,390
+            C 405,415 395,440 375,455
+            C 380,480 370,505 350,520
+            C 355,545 345,570 320,585
+            C 310,605 285,615 260,610
+            C 235,620 205,615 185,600
+            C 160,595 145,580 140,460 Z
+          " fill="var(--map-bg)" stroke="#999" stroke-width="1.5" opacity="0.4"></path>
 
-          <!-- Ring Road / Day routes -->
-          <!-- Day 1: Keflavík -> Reykjavík (blue) -->
-          <path class="route-line" stroke="var(--day1)" d="M 120,540 Q 140,520 155,500"></path>
-          <!-- Day 2: Reykjavík -> Golden Circle -> Vík (orange) -->
-          <path class="route-line" stroke="var(--day2)" d="M 155,500 Q 180,480 200,470 Q 220,460 210,440 Q 195,425 190,410 Q 195,390 210,375 Q 230,365 250,380 Q 270,395 275,420 Q 280,445 285,470 Q 288,490 285,510"></path>
-          <!-- Day 3: Vík -> Jökulsárlón -> Höfn (yellow) -->
-          <path class="route-line" stroke="var(--day3)" d="M 285,510 Q 300,490 320,475 Q 345,460 360,440 Q 375,420 380,395 Q 385,370 390,345 Q 395,320 395,295 Q 398,270 400,245"></path>
-          <!-- Day 4: Höfn -> Egilsstaðir (green) -->
-          <path class="route-line" stroke="var(--day4)" d="M 400,245 Q 405,220 400,195 Q 395,170 380,150 Q 370,130 355,115 Q 340,100 320,90"></path>
-          <!-- Day 5: Egilsstaðir -> Mývatn (cyan) -->
-          <path class="route-line" stroke="var(--day5)" d="M 320,90 Q 300,80 280,75 Q 260,72 240,70 Q 220,70 200,75 Q 185,80 175,95"></path>
-          <!-- Day 6: Mývatn -> Akureyri (blue) -->
-          <path class="route-line" stroke="var(--day6)" d="M 175,95 Q 160,110 150,130 Q 140,150 135,175 Q 130,200 135,225"></path>
-          <!-- Day 7: Akureyri -> Hvammstangi (purple) -->
-          <path class="route-line" stroke="var(--day7)" d="M 135,225 Q 120,250 110,275 Q 100,300 95,330 Q 90,360 95,390 Q 100,415 110,435"></path>
-          <!-- Day 8: Hvammstangi -> Snæfellsnes (pink) -->
-          <path class="route-line" stroke="var(--day8)" d="M 110,435 Q 105,455 105,475 Q 108,490 115,500 Q 110,505 100,515 Q 90,525 85,515 Q 80,500 85,485 Q 90,470 100,460 Q 110,450 125,455 Q 135,460 140,475"></path>
-          <!-- Day 9: Snæfellsnes -> Reykjavík (brown) -->
-          <path class="route-line" stroke="var(--day9)" d="M 140,475 Q 145,485 150,490 Q 152,492 155,500"></path>
-          <!-- Day 10: Reykjavík -> Blue Lagoon -> Keflavík (grey) -->
-          <path class="route-line" stroke="var(--day10)" d="M 155,500 Q 140,520 120,540"></path>
+          <!-- ====== DAY TRIP ROUTES (all from Reykjavik, radiating out) ====== -->
 
-          <!-- Key locations / overnight stays -->
-          <!-- Keflavík -->
-          <circle class="map-location" cx="120" cy="540" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Keflavík International Airport, Iceland')"></circle>
-          <!-- Reykjavík -->
-          <circle class="map-location" cx="155" cy="500" r="6" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Reykjavík, Iceland')"></circle>
-          <!-- Vík -->
-          <circle class="map-location" cx="285" cy="510" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Vík í Mýrdal, Iceland')"></circle>
-          <!-- Höfn -->
-          <circle class="map-location" cx="400" cy="245" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Höfn, Iceland')"></circle>
-          <!-- Egilsstaðir -->
-          <circle class="map-location" cx="320" cy="90" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Egilsstaðir, Iceland')"></circle>
-          <!-- Mývatn -->
-          <circle class="map-location" cx="175" cy="95" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Mývatn, Iceland')"></circle>
-          <!-- Akureyri -->
-          <circle class="map-location" cx="135" cy="225" r="6" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Akureyri, Iceland')"></circle>
-          <!-- Hvammstangi -->
-          <circle class="map-location" cx="110" cy="435" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Hvammstangi, Iceland')"></circle>
-          <!-- Snæfellsnes / Stykkishólmur -->
-          <circle class="map-location" cx="140" cy="475" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Stykkishólmur, Iceland')"></circle>
-          <!-- Blue Lagoon -->
-          <circle class="map-location" cx="135" cy="520" r="4" fill="#4DD0E1" stroke="white" stroke-width="1.5" onclick="openMaps('Blue Lagoon, Iceland')"></circle>
-          <!-- Jökulsárlón -->
-          <circle class="map-location" cx="380" cy="395" r="4" fill="#64B5F6" stroke="white" stroke-width="1.5" onclick="openMaps('Jökulsárlón Glacier Lagoon, Iceland')"></circle>
-          <!-- Gullfoss -->
-          <circle class="map-location" cx="210" cy="375" r="4" fill="#64B5F6" stroke="white" stroke-width="1.5" onclick="openMaps('Gullfoss, Iceland')"></circle>
-          <!-- Dettifoss -->
-          <circle class="map-location" cx="240" cy="70" r="4" fill="#64B5F6" stroke="white" stroke-width="1.5" onclick="openMaps('Dettifoss, Iceland')"></circle>
-          <!-- Goðafoss -->
-          <circle class="map-location" cx="155" cy="150" r="4" fill="#64B5F6" stroke="white" stroke-width="1.5" onclick="openMaps('Goðafoss, Iceland')"></circle>
-          <!-- Kirkjufell -->
-          <circle class="map-location" cx="95" cy="500" r="4" fill="#64B5F6" stroke="white" stroke-width="1.5" onclick="openMaps('Kirkjufell, Iceland')"></circle>
+          <!-- D3 Golden Circle - 金黄色 - 东偏北 inland -->
+          <path class="route-line" stroke="#E8B339" stroke-width="3" d="
+            M 195,380
+            Q 220,355 240,340
+            Q 260,325 250,300
+            Q 240,280 255,265
+            Q 270,255 285,270
+            Q 290,280 280,295
+            Q 275,310 290,325
+            Q 300,335 295,350
+            Q 290,360 275,365
+          " marker-end="url(#arrow-golden)"></path>
+          <!-- Golden Circle key spots -->
+          <circle class="map-location" cx="240" cy="340" r="4" fill="#E8B339" stroke="white" stroke-width="1.5" onclick="openMaps('Þingvellir National Park, Iceland')"></circle>
+          <circle class="map-location" cx="255" cy="265" r="4" fill="#E8B339" stroke="white" stroke-width="1.5" onclick="openMaps('Gullfoss, Iceland')"></circle>
+          <circle class="map-location" cx="285" cy="270" r="3.5" fill="#E8B339" stroke="white" stroke-width="1.5" onclick="openMaps('Geysir, Iceland')"></circle>
+          <text x="265" y="258" text-anchor="middle" font-size="9" fill="#E8B339" font-weight="600">黄金圈</text>
 
-          <!-- Location labels -->
-          <text x="120" y="558" text-anchor="middle" font-size="9" fill="var(--text-secondary)">凯夫拉维克</text>
-          <text x="170" y="498" text-anchor="start" font-size="10" fill="var(--text-primary)" font-weight="600">雷克雅未克</text>
-          <text x="300" y="508" text-anchor="start" font-size="9" fill="var(--text-secondary)">维克</text>
-          <text x="412" y="248" text-anchor="start" font-size="9" fill="var(--text-secondary)">霍芬</text>
-          <text x="330" y="86" text-anchor="start" font-size="9" fill="var(--text-secondary)">埃伊尔斯塔济</text>
-          <text x="185" y="92" text-anchor="start" font-size="9" fill="var(--text-secondary)">米湖</text>
-          <text x="148" y="228" text-anchor="start" font-size="10" fill="var(--text-primary)" font-weight="600">阿克雷里</text>
-          <text x="122" y="432" text-anchor="start" font-size="9" fill="var(--text-secondary)">华姆斯唐吉</text>
-          <text x="152" y="472" text-anchor="start" font-size="9" fill="var(--text-secondary)">斯奈山</text>
+          <!-- D5 Snæfellsnes - 蓝绿色 - 西边半岛 -->
+          <path class="route-line" stroke="#4DB6AC" stroke-width="3" d="
+            M 195,380
+            Q 165,385 140,395
+            Q 115,405 100,385
+            Q 85,365 90,345
+            Q 95,330 110,320
+            Q 100,310 95,295
+            Q 90,280 100,270
+            Q 110,260 125,265
+          " marker-end="url(#arrow-snae)"></path>
+          <!-- Snæfellsnes key spots -->
+          <circle class="map-location" cx="125" cy="265" r="4" fill="#4DB6AC" stroke="white" stroke-width="1.5" onclick="openMaps('Kirkjufell, Iceland')"></circle>
+          <circle class="map-location" cx="100" cy="385" r="3.5" fill="#4DB6AC" stroke="white" stroke-width="1.5" onclick="openMaps('Stykkishólmur, Iceland')"></circle>
+          <text x="95" y="258" text-anchor="middle" font-size="9" fill="#4DB6AC" font-weight="600">斯奈山</text>
+
+          <!-- D6 Horse Riding - 草绿色 - 近郊东南 -->
+          <path class="route-line" stroke="#81C784" stroke-width="3" d="
+            M 195,380
+            Q 215,395 240,410
+            Q 260,420 270,435
+          " marker-end="url(#arrow-horse)"></path>
+          <circle class="map-location" cx="270" cy="435" r="4" fill="#81C784" stroke="white" stroke-width="1.5" onclick="openMaps('Eldhestar, Iceland')"></circle>
+          <text x="295" y="438" text-anchor="start" font-size="9" fill="#81C784" font-weight="600">骑马</text>
+
+          <!-- D7 South Coast + Jökulsárlón - 冰蓝色 - 东南方向 -->
+          <path class="route-line" stroke="#5C9EED" stroke-width="3" d="
+            M 195,380
+            Q 230,400 260,420
+            Q 290,435 310,420
+            Q 330,405 345,385
+            Q 360,365 370,340
+            Q 380,315 385,290
+            Q 390,270 395,250
+            Q 400,280 395,310
+            Q 390,340 380,370
+          " marker-end="url(#arrow-south)"></path>
+          <!-- South coast key spots -->
+          <circle class="map-location" cx="290" cy="430" r="3.5" fill="#5C9EED" stroke="white" stroke-width="1.5" onclick="openMaps('Seljalandsfoss, Iceland')"></circle>
+          <circle class="map-location" cx="335" cy="400" r="3.5" fill="#5C9EED" stroke="white" stroke-width="1.5" onclick="openMaps('Reynisfjara Black Sand Beach, Iceland')"></circle>
+          <circle class="map-location" cx="395" cy="250" r="4.5" fill="#5C9EED" stroke="white" stroke-width="1.5" onclick="openMaps('Jökulsárlón Glacier Lagoon, Iceland')"></circle>
+          <text x="410" y="248" text-anchor="start" font-size="9" fill="#5C9EED" font-weight="600">冰河湖</text>
+          <text x="330" y="445" text-anchor="middle" font-size="8" fill="#5C9EED">南岸</text>
+
+          <!-- D1 Aurora Hunting - 紫色虚线 - 向北 (indicates chasing, variable direction) -->
+          <path class="route-line" stroke="#9575CD" stroke-width="2.5" stroke-dasharray="6,4" d="
+            M 195,380
+            Q 190,340 200,300
+            Q 210,265 220,230
+          " marker-end="url(#arrow-aurora)"></path>
+          <!-- Aurora waves in the sky -->
+          <path d="M 160,180 Q 190,160 220,175 Q 250,190 280,170 Q 310,155 340,170" fill="none" stroke="#9575CD" stroke-width="2" opacity="0.6" class="sketch-filter" filter="url(#sketchy2)"></path>
+          <path d="M 170,195 Q 200,178 230,190 Q 260,202 290,188 Q 320,175 345,185" fill="none" stroke="#7E57C2" stroke-width="1.5" opacity="0.5" class="sketch-filter" filter="url(#sketchy2)"></path>
+          <text x="250" y="215" text-anchor="middle" font-size="9" fill="#9575CD" font-weight="600">🌌 极光狩猎</text>
+
+          <!-- ====== HOME BASE: Reykjavík ====== -->
+          <!-- Big pulsing home marker -->
+          <circle cx="195" cy="380" r="12" fill="#d4654a" stroke="white" stroke-width="2.5" opacity="0.3">
+            <animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite"></animate>
+            <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2s" repeatCount="indefinite"></animate>
+          </circle>
+          <circle class="map-location" cx="195" cy="380" r="8" fill="#d4654a" stroke="white" stroke-width="2.5" onclick="openMaps('Hofsvallagata 55, 107 Reykjavík, Iceland')"></circle>
+          <text x="210" y="375" text-anchor="start" font-size="11" fill="var(--text-primary)" font-weight="700">🏠 雷克雅未克</text>
+          <text x="210" y="390" text-anchor="start" font-size="8.5" fill="var(--text-muted)">大本营 · 8晚都住这</text>
+
+          <!-- Keflavík airport -->
+          <circle class="map-location" cx="155" cy="420" r="5" fill="#888" stroke="white" stroke-width="2" onclick="openMaps('Keflavík International Airport, Iceland')"></circle>
+          <text x="135" y="435" text-anchor="middle" font-size="8.5" fill="var(--text-secondary)">✈️ 机场</text>
+
+          <!-- Arrival line from airport -->
+          <path class="route-line" stroke="#888" stroke-width="2" stroke-dasharray="4,3" d="M 155,420 Q 170,405 195,390"></path>
+
         </svg>
       </div>
       <div class="map-legend">
-        <div class="legend-item"><div class="dot" style="background:var(--day1)"></div>D1 抵达</div>
-        <div class="legend-item"><div class="dot" style="background:var(--day2)"></div>D2 黄金圈</div>
-        <div class="legend-item"><div class="dot" style="background:var(--day3)"></div>D3 南岸</div>
-        <div class="legend-item"><div class="dot" style="background:var(--day4)"></div>D4 东峡湾</div>
-        <div class="legend-item"><div class="dot" style="background:var(--day5)"></div>D5 北部</div>
-        <div class="legend-item"><div class="dot" style="background:var(--day6)"></div>D6 阿克雷里</div>
-        <div class="legend-item"><div class="dot" style="background:var(--day7)"></div>D7 西北</div>
-        <div class="legend-item"><div class="dot" style="background:var(--day8)"></div>D8 斯奈山</div>
-        <div class="legend-item"><div class="dot" style="background:var(--day9)"></div>D9 返回</div>
-        <div class="legend-item"><div class="dot" style="background:var(--day10)"></div>D10 离境</div>
-        <div class="legend-item"><div class="dot" style="background:#d4654a"></div>住宿点</div>
+        <div class="legend-item"><div class="dot" style="background:#d4654a"></div>🏠 大本营（8晚）</div>
+        <div class="legend-item"><div class="dot" style="background:#E8B339"></div>D3 黄金圈</div>
+        <div class="legend-item"><div class="dot" style="background:#4DB6AC"></div>D5 斯奈山</div>
+        <div class="legend-item"><div class="dot" style="background:#81C784"></div>D6 骑马</div>
+        <div class="legend-item"><div class="dot" style="background:#5C9EED"></div>D7 南岸+冰河湖</div>
+        <div class="legend-item"><div class="dot" style="background:#9575CD"></div>D1晚 极光狩猎</div>
       </div>
     </div>
   </div>
