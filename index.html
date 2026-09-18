@@ -292,6 +292,32 @@
     position: relative;
     z-index: 1;
   }
+  .today-schedule-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 10px 18px;
+    background: var(--accent);
+    color: white;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+  .today-schedule-btn:active {
+    transform: scale(0.96);
+  }
+  .today-arrow {
+    transition: transform 0.2s ease;
+  }
+  .today-schedule-btn:hover .today-arrow {
+    transform: translateX(3px);
+  }
 
   /* ===== Section ===== */
   .section {
@@ -821,6 +847,10 @@
     </div>
     <div class="countdown-tz" id="cdTz">冰岛时间 9月18日 15:07 (GMT+0)</div>
     <div class="countdown-tz" id="cdTzCn" style="margin-top:4px;font-size:12px;opacity:0.75;">北京时间 9月18日 23:07 (GMT+8)</div>
+    <div class="today-schedule-btn" onclick="jumpToTodaySchedule()">
+      <span>📅 查看今日日程</span>
+      <span class="today-arrow">→</span>
+    </div>
   </div>
 
 
@@ -2480,10 +2510,57 @@ function updateItineraryHeight() {
   }
 }
 
-// 默认展开第1天
+// 计算今天是行程的第几天（基于冰岛时间，day0 = 9月24日）
+function getTodayDayIndex() {
+  const now = new Date();
+  const day0Date = new Date('2026-09-24T00:00:00Z'); // 9月24日 00:00 冰岛时间 = day0
+  const diffMs = now - day0Date;
+  const dayIndex = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  // 限制在 0-10 范围内
+  return Math.max(0, Math.min(10, dayIndex));
+}
+
+// 跳转到今日日程
+function jumpToTodaySchedule() {
+  const dayIndex = getTodayDayIndex();
+  const dayId = 'day' + dayIndex;
+  const dayEl = document.getElementById(dayId);
+
+  // 先确保逐日行程板块是展开的
+  const wrapper = document.getElementById('itinerary-wrapper');
+  if (wrapper && wrapper.classList.contains('collapsed')) {
+    toggleItinerary();
+  }
+
+  // 折叠其他天，只展开今天
+  document.querySelectorAll('.day-block').forEach(block => {
+    block.classList.remove('expanded');
+  });
+  if (dayEl) {
+    dayEl.classList.add('expanded');
+  }
+
+  setTimeout(() => {
+    updateItineraryHeight();
+    if (dayEl) {
+      const nav = document.getElementById('quickNav');
+      const navHeight = nav ? nav.offsetHeight : 60;
+      const top = dayEl.getBoundingClientRect().top + window.pageYOffset - navHeight - 10;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  }, 50);
+}
+
+// 默认展开当天行程，折叠其他
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('day0').classList.add('expanded');
-  document.getElementById('day1').classList.add('expanded');
+  const todayIndex = getTodayDayIndex();
+  document.querySelectorAll('.day-block').forEach((block, index) => {
+    if (index === todayIndex) {
+      block.classList.add('expanded');
+    } else {
+      block.classList.remove('expanded');
+    }
+  });
 
   // 将 timeline-item 中标题/描述/标签包裹进 .timeline-right
   document.querySelectorAll('.timeline-item').forEach(item => {
