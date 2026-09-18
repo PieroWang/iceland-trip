@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>冰岛9日 · 旅行手册</title>
+<style>
+  /* ===== CSS Variables - Day/Night Theme ===== */
+  :root {
+    --bg: #faf8f5;
+    --bg-card: #ffffff;
+    --bg-card-alt: #f5f2ed;
+    --text-primary: #2c2c2c;
+    --text-secondary: #6b6b6b;
+    --text-muted: #9a9a9a;
+    --border: #e8e4de;
+    --accent: #d4654a;
+    --accent-light: #f5e6e1;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+    --map-bg: #f0ebe3;
+    --countdown-bg: linear-gradient(135deg, #d4654a 0%, #e8947a 100%);
+    --radius: 14px;
+    --day1: #E57373;
+    --day2: #FFB74D;
+    --day3: #FFD54F;
+    --day4: #81C784;
+    --day5: #4DD0E1;
+    --day6: #64B5F6;
+    --day7: #9575CD;
+    --day8: #F06292;
+    --day9: #A1887F;
+    --day10: #90A4AE;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a1a;
+      --bg-card: #252525;
+      --bg-card-alt: #2e2e2e;
+      --text-primary: #f0f0f0;
+      --text-secondary: #b0b0b0;
+      --text-muted: #707070;
+      --border: #3a3a3a;
+      --accent: #e8947a;
+      --accent-light: #3d2a24;
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+      --map-bg: #2a2a2a;
+      --countdown-bg: linear-gradient(135deg, #b84a32 0%, #d4654a 100%);
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 40px;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* ===== Header ===== */
+  .header {
+    text-align: center;
+    padding: 32px 0 20px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .header .subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  /* ===== Countdown Card ===== */
+  .countdown-card {
+    background: var(--countdown-bg);
+    color: white;
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .countdown-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .countdown-card::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 150px;
+    height: 150px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .countdown-label {
+    font-size: 13px;
+    opacity: 0.9;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .countdown-event {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .countdown-numbers {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .countdown-unit {
+    flex: 1;
+    text-align: center;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 12px 4px;
+    backdrop-filter: blur(10px);
+  }
+  .countdown-unit .num {
+    font-size: 28px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .countdown-unit .label {
+    font-size: 11px;
+    opacity: 0.85;
+    margin-top: 4px;
+  }
+  .countdown-tz {
+    font-size: 11px;
+    opacity: 0.7;
+    text-align: center;
+    margin-top: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== Section ===== */
+  .section {
+    margin-bottom: 32px;
+  }
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon {
+    font-size: 20px;
+  }
+
+  /* ===== Map Card ===== */
+  .map-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+  }
+  .map-svg-container {
+    width: 100%;
+    background: var(--map-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  .map-svg-container svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .map-legend .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .map-legend .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* ===== Booking Cards ===== */
+  .booking-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .booking-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+  }
+  .booking-card.flight { border-left-color: #64B5F6; }
+  .booking-card.car { border-left-color: #81C784; }
+  .booking-card.hotel { border-left-color: #FFB74D; }
+  .booking-card.ticket { border-left-color: #9575CD; }
+  .booking-type {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .booking-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .booking-detail {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+  .booking-detail .row {
+    display: flex;
+    gap: 6px;
+  }
+  .booking-detail .label {
+    color: var(--text-muted);
+    min-width: 48px;
+    flex-shrink: 0;
+  }
+  .booking-status {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--accent-light);
+    color: var(--accent);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  .booking-status.pending {
+    background: var(--bg-card-alt);
+    color: var(--text-muted);
+  }
+
+  /* ===== Itinerary Timeline ===== */
+  .day-block {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .day-header {
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-left: 5px solid;
+    transition: background 0.2s;
+  }
+  .day-header:active { background: var(--bg-card-alt); }
+  .day-header.day1 { border-left-color: var(--day1); }
+  .day-header.day2 { border-left-color: var(--day2); }
+  .day-header.day3 { border-left-color: var(--day3); }
+  .day-header.day4 { border-left-color: var(--day4); }
+  .day-header.day5 { border-left-color: var(--day5); }
+  .day-header.day6 { border-left-color: var(--day6); }
+  .day-header.day7 { border-left-color: var(--day7); }
+  .day-header.day8 { border-left-color: var(--day8); }
+  .day-header.day9 { border-left-color: var(--day9); }
+  .day-header.day10 { border-left-color: var(--day10); }
+
+  .day-info .day-num {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .day-info .day-route {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+  .day-stats {
+    text-align: right;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .day-stats .drive { font-weight: 500; color: var(--text-secondary); }
+  .day-expand-arrow {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform 0.3s;
+    margin-left: 8px;
+  }
+  .day-block.expanded .day-expand-arrow { transform: rotate(180deg); }
+
+  .day-content {
+    display: none;
+    padding: 0 16px 16px;
+  }
+  .day-block.expanded .day-content { display: block; }
+
+  .day-map-btn {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .day-map-btn a {
+    flex: 1;
+    text-align: center;
+    padding: 8px 12px;
+    background: var(--bg-card-alt);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .day-map-btn a:active { background: var(--border); }
+  .day-map-btn a.nav-btn {
+    background: var(--accent);
+    color: white;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 20px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--border);
+    border-radius: 1px;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 3px solid;
+    z-index: 1;
+  }
+  .day1 .timeline-item::before { border-color: var(--day1); }
+  .day2 .timeline-item::before { border-color: var(--day2); }
+  .day3 .timeline-item::before { border-color: var(--day3); }
+  .day4 .timeline-item::before { border-color: var(--day4); }
+  .day5 .timeline-item::before { border-color: var(--day5); }
+  .day6 .timeline-item::before { border-color: var(--day6); }
+  .day7 .timeline-item::before { border-color: var(--day7); }
+  .day8 .timeline-item::before { border-color: var(--day8); }
+  .day9 .timeline-item::before { border-color: var(--day9); }
+  .day10 .timeline-item::before { border-color: var(--day10); }
+
+  .timeline-time {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+  .timeline-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 2px 0;
+  }
+  .timeline-title a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--text-muted);
+  }
+  .timeline-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .timeline-tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 500;
+    margin-top: 4px;
+    margin-right: 4px;
+  }
+  .timeline-tag.book { background: #fff3e0; color: #e65100; }
+  .timeline-tag.free { background: #e8f5e9; color: #2e7d32; }
+  .timeline-tag.warn { background: #ffebee; color: #c62828; }
+
+  @media (prefers-color-scheme: dark) {
+    .timeline-tag.book { background: #3d2818; color: #ffb74d; }
+    .timeline-tag.free { background: #1b3a1e; color: #81c784; }
+    .timeline-tag.warn { background: #3d1f1f; color: #ef9a9a; }
+  }
+
+  /* ===== Todo List ===== */
+  .todo-list {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 4px 0;
+    box-shadow: var(--shadow);
+  }
+  .todo-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .todo-item:last-child { border-bottom: none; }
+  .todo-item .todo-bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+  .todo-item.done .todo-bullet { background: var(--text-muted); }
+  .todo-item.done { color: var(--text-muted); text-decoration: line-through; }
+  .todo-item .todo-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* ===== Tips ===== */
+  .tips-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tip-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .tip-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tip-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ===== SVG Map Hand-drawn Effect ===== */
+  .sketch-filter { filter: url(#sketchy); }
+
+  /* Map clickable areas */
+  .map-location {
+    cursor: pointer;
+    transition: r 0.2s;
+  }
+  .map-location:hover { r: 8; }
+
+  /* Day route lines on main map */
+  .route-line {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.85;
+  }
+
+  /* ===== Expand all button ===== */
+  .expand-all-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background: var(--bg-card-alt);
+    border: none;
+    border-radius: 10px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 12px;
+  }
+  .expand-all-btn:active { background: var(--border); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ===== Header ===== -->
+  <div class="header">
+    <h1>🇮🇸 冰岛 · 9天</h1>
+    <div class="subtitle">6人同行 · 旅行团 · 芬兰航空</div>
+  </div>
+
+  <!-- ===== Countdown Card ===== -->
+  <div class="countdown-card">
+    <div class="countdown-label">⏰ 此刻关注</div>
+    <div class="countdown-event" id="nextEvent">出发 · 前往凯夫拉维克机场</div>
+    <div class="countdown-numbers">
+      <div class="countdown-unit">
+        <div class="num" id="cdDays">--</div>
+        <div class="label">天</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="num" id="cdHours">--</div>
+        <div class="label">时</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="num" id="cdMins">--</div>
+        <div class="label">分</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="num" id="cdSecs">--</div>
+        <div class="label">秒</div>
+      </div>
+    </div>
+    <div class="countdown-tz" id="cdTz">冰岛时间 (GMT+0)</div>
+  </div>
+
+  <!-- ===== Map Overview ===== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🗺️</span> 行程总览地图 <span style="font-size:12px;font-weight:normal;color:var(--text-muted);">（参考图，待旅行团确认后更新）</span></div>
+    <div class="map-card">
+      <div class="map-svg-container">
+        <svg viewBox="0 0 500 650" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="sketchy">
+              <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise"></feTurbulence>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+            </filter>
+          </defs>
+
+          <!-- Iceland outline (simplified, hand-drawn style) -->
+          <path class="sketch-filter" d="
+            M 120,580
+            C 100,560 95,530 100,500
+            C 90,480 85,450 90,420
+            C 80,390 75,360 85,330
+            C 75,300 70,270 85,240
+            C 75,210 80,180 100,155
+            C 90,130 100,105 125,90
+            C 115,70 130,50 155,45
+            C 165,25 190,15 215,20
+            C 240,10 270,15 295,30
+            C 320,20 345,30 360,50
+            C 385,45 405,60 410,85
+            C 430,95 440,115 435,140
+            C 450,160 450,185 440,210
+            C 450,235 445,260 430,280
+            C 435,305 425,330 405,345
+            C 410,370 400,395 380,410
+            C 385,435 375,460 355,475
+            C 360,500 350,525 330,540
+            C 335,565 325,590 300,605
+            C 290,625 265,635 240,630
+            C 215,640 185,635 165,620
+            C 140,615 125,600 120,580 Z
+          " fill="var(--map-bg)" stroke="#888" stroke-width="1.5" opacity="0.5"></path>
+
+          <!-- Ring Road / Day routes -->
+          <!-- Day 1: Keflavík -> Reykjavík (blue) -->
+          <path class="route-line" stroke="var(--day1)" d="M 120,540 Q 140,520 155,500"></path>
+          <!-- Day 2: Reykjavík -> Golden Circle -> Vík (orange) -->
+          <path class="route-line" stroke="var(--day2)" d="M 155,500 Q 180,480 200,470 Q 220,460 210,440 Q 195,425 190,410 Q 195,390 210,375 Q 230,365 250,380 Q 270,395 275,420 Q 280,445 285,470 Q 288,490 285,510"></path>
+          <!-- Day 3: Vík -> Jökulsárlón -> Höfn (yellow) -->
+          <path class="route-line" stroke="var(--day3)" d="M 285,510 Q 300,490 320,475 Q 345,460 360,440 Q 375,420 380,395 Q 385,370 390,345 Q 395,320 395,295 Q 398,270 400,245"></path>
+          <!-- Day 4: Höfn -> Egilsstaðir (green) -->
+          <path class="route-line" stroke="var(--day4)" d="M 400,245 Q 405,220 400,195 Q 395,170 380,150 Q 370,130 355,115 Q 340,100 320,90"></path>
+          <!-- Day 5: Egilsstaðir -> Mývatn (cyan) -->
+          <path class="route-line" stroke="var(--day5)" d="M 320,90 Q 300,80 280,75 Q 260,72 240,70 Q 220,70 200,75 Q 185,80 175,95"></path>
+          <!-- Day 6: Mývatn -> Akureyri (blue) -->
+          <path class="route-line" stroke="var(--day6)" d="M 175,95 Q 160,110 150,130 Q 140,150 135,175 Q 130,200 135,225"></path>
+          <!-- Day 7: Akureyri -> Hvammstangi (purple) -->
+          <path class="route-line" stroke="var(--day7)" d="M 135,225 Q 120,250 110,275 Q 100,300 95,330 Q 90,360 95,390 Q 100,415 110,435"></path>
+          <!-- Day 8: Hvammstangi -> Snæfellsnes (pink) -->
+          <path class="route-line" stroke="var(--day8)" d="M 110,435 Q 105,455 105,475 Q 108,490 115,500 Q 110,505 100,515 Q 90,525 85,515 Q 80,500 85,485 Q 90,470 100,460 Q 110,450 125,455 Q 135,460 140,475"></path>
+          <!-- Day 9: Snæfellsnes -> Reykjavík (brown) -->
+          <path class="route-line" stroke="var(--day9)" d="M 140,475 Q 145,485 150,490 Q 152,492 155,500"></path>
+          <!-- Day 10: Reykjavík -> Blue Lagoon -> Keflavík (grey) -->
+          <path class="route-line" stroke="var(--day10)" d="M 155,500 Q 140,520 120,540"></path>
+
+          <!-- Key locations / overnight stays -->
+          <!-- Keflavík -->
+          <circle class="map-location" cx="120" cy="540" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Keflavík International Airport, Iceland')"></circle>
+          <!-- Reykjavík -->
+          <circle class="map-location" cx="155" cy="500" r="6" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Reykjavík, Iceland')"></circle>
+          <!-- Vík -->
+          <circle class="map-location" cx="285" cy="510" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Vík í Mýrdal, Iceland')"></circle>
+          <!-- Höfn -->
+          <circle class="map-location" cx="400" cy="245" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Höfn, Iceland')"></circle>
+          <!-- Egilsstaðir -->
+          <circle class="map-location" cx="320" cy="90" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Egilsstaðir, Iceland')"></circle>
+          <!-- Mývatn -->
+          <circle class="map-location" cx="175" cy="95" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Mývatn, Iceland')"></circle>
+          <!-- Akureyri -->
+          <circle class="map-location" cx="135" cy="225" r="6" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Akureyri, Iceland')"></circle>
+          <!-- Hvammstangi -->
+          <circle class="map-location" cx="110" cy="435" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Hvammstangi, Iceland')"></circle>
+          <!-- Snæfellsnes / Stykkishólmur -->
+          <circle class="map-location" cx="140" cy="475" r="5" fill="#d4654a" stroke="white" stroke-width="2" onclick="openMaps('Stykkishólmur, Iceland')"></circle>
+          <!-- Blue Lagoon -->
+          <circle class="map-location" cx="135" cy="520" r="4" fill="#4DD0E1" stroke="white" stroke-width="1.5" onclick="openMaps('Blue Lagoon, Iceland')"></circle>
+          <!-- Jökulsárlón -->
+          <circle class="map-location" cx="380" cy="395" r="4" fill="#64B5F6" stroke="white" stroke-width="1.5" onclick="openMaps('Jökulsárlón Glacier Lagoon, Iceland')"></circle>
+          <!-- Gullfoss -->
+          <circle class="map-location" cx="210" cy="375" r="4" fill="#64B5F6" stroke="white" stroke-width="1.5" onclick="openMaps('Gullfoss, Iceland')"></circle>
+          <!-- Dettifoss -->
+          <circle class="map-location" cx="240" cy="70" r="4" fill="#64B5F6" stroke="white" stroke-width="1.5" onclick="openMaps('Dettifoss, Iceland')"></circle>
+          <!-- Goðafoss -->
+          <circle class="map-location" cx="155" cy="150" r="4" fill="#64B5F6" stroke="white" stroke-width="1.5" onclick="openMaps('Goðafoss, Iceland')"></circle>
+          <!-- Kirkjufell -->
+          <circle class="map-location" cx="95" cy="500" r="4" fill="#64B5F6" stroke="white" stroke-width="1.5" onclick="openMaps('Kirkjufell, Iceland')"></circle>
+
+          <!-- Location labels -->
+          <text x="120" y="558" text-anchor="middle" font-size="9" fill="var(--text-secondary)">凯夫拉维克</text>
+          <text x="170" y="498" text-anchor="start" font-size="10" fill="var(--text-primary)" font-weight="600">雷克雅未克</text>
+          <text x="300" y="508" text-anchor="start" font-size="9" fill="var(--text-secondary)">维克</text>
+          <text x="412" y="248" text-anchor="start" font-size="9" fill="var(--text-secondary)">霍芬</text>
+          <text x="330" y="86" text-anchor="start" font-size="9" fill="var(--text-secondary)">埃伊尔斯塔济</text>
+          <text x="185" y="92" text-anchor="start" font-size="9" fill="var(--text-secondary)">米湖</text>
+          <text x="148" y="228" text-anchor="start" font-size="10" fill="var(--text-primary)" font-weight="600">阿克雷里</text>
+          <text x="122" y="432" text-anchor="start" font-size="9" fill="var(--text-secondary)">华姆斯唐吉</text>
+          <text x="152" y="472" text-anchor="start" font-size="9" fill="var(--text-secondary)">斯奈山</text>
+        </svg>
+      </div>
+      <div class="map-legend">
+        <div class="legend-item"><div class="dot" style="background:var(--day1)"></div>D1 抵达</div>
+        <div class="legend-item"><div class="dot" style="background:var(--day2)"></div>D2 黄金圈</div>
+        <div class="legend-item"><div class="dot" style="background:var(--day3)"></div>D3 南岸</div>
+        <div class="legend-item"><div class="dot" style="background:var(--day4)"></div>D4 东峡湾</div>
+        <div class="legend-item"><div class="dot" style="background:var(--day5)"></div>D5 北部</div>
+        <div class="legend-item"><div class="dot" style="background:var(--day6)"></div>D6 阿克雷里</div>
+        <div class="legend-item"><div class="dot" style="background:var(--day7)"></div>D7 西北</div>
+        <div class="legend-item"><div class="dot" style="background:var(--day8)"></div>D8 斯奈山</div>
+        <div class="legend-item"><div class="dot" style="background:var(--day9)"></div>D9 返回</div>
+        <div class="legend-item"><div class="dot" style="background:var(--day10)"></div>D10 离境</div>
+        <div class="legend-item"><div class="dot" style="background:#d4654a"></div>住宿点</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Confirmed Bookings ===== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">✅</span> 已确认预订</div>
+    <div class="booking-grid">
+
+      <!-- Flight 去程 -->
+      <div class="booking-card flight">
+        <div class="booking-type">✈️ 国际机票 · 去程</div>
+        <div class="booking-title">香港 → 凯夫拉维克（芬兰航空，赫尔辛基中转）</div>
+        <div class="booking-detail">
+          <div class="row"><span class="label">第1段</span><span>AY0100 · 香港 HKG → 赫尔辛基 HEL</span></div>
+          <div class="row"><span class="label">时间</span><span>9月24日 20:55 → 9月25日 05:35（+1天）</span></div>
+          <div class="row"><span class="label">航站楼</span><span>香港 T1</span></div>
+          <div class="row"><span class="label">中转</span><span>赫尔辛基 1小时35分</span></div>
+          <div class="row"><span class="label">第2段</span><span>AY0991 · 赫尔辛基 HEL → 凯夫拉维克 KEF</span></div>
+          <div class="row"><span class="label">时间</span><span>9月25日 07:10 → 07:50</span></div>
+          <div class="row"><span class="label">行李</span><span>托运 23kg × 1 + 随身 × 1</span></div>
+        </div>
+        <span class="booking-status">已出票</span>
+      </div>
+
+      <!-- Flight 回程 -->
+      <div class="booking-card flight">
+        <div class="booking-type">✈️ 国际机票 · 回程</div>
+        <div class="booking-title">凯夫拉维克 → 香港（芬兰航空，赫尔辛基过夜中转）</div>
+        <div class="booking-detail">
+          <div class="row"><span class="label">第1段</span><span>AY0992 · 凯夫拉维克 KEF → 赫尔辛基 HEL</span></div>
+          <div class="row"><span class="label">时间</span><span>10月3日 08:40 → 15:00</span></div>
+          <div class="row"><span class="label">中转</span><span>赫尔辛基 约9小时35分（过夜）</span></div>
+          <div class="row"><span class="label">第2段</span><span>AY0099 · 赫尔辛基 HEL → 香港 HKG</span></div>
+          <div class="row"><span class="label">时间</span><span>10月4日 00:35 → 17:40</span></div>
+          <div class="row"><span class="label">航站楼</span><span>香港 T1</span></div>
+          <div class="row"><span class="label">行李</span><span>托运 23kg × 1 + 随身 × 1</span></div>
+        </div>
+        <span class="booking-status">已出票</span>
+      </div>
+
+      <!-- Car rental -->
+      <div class="booking-card car">
+        <div class="booking-type">🚌 交通</div>
+        <div class="booking-title">旅行团大巴 · 待确认</div>
+        <div class="booking-detail">
+          <div class="row"><span class="label">说明</span><span>跟团出行，交通由旅行社安排</span></div>
+          <div class="row"><span class="label">车型</span><span>—— 等旅行团行程单 ——</span></div>
+        </div>
+        <span class="booking-status pending">待旅行团确认</span>
+      </div>
+
+      <!-- Hotels placeholders -->
+      <div class="booking-card hotel">
+        <div class="booking-type">🏨 住宿 · 共8晚（Airbnb）</div>
+        <div class="booking-title">Bright flat, sunset balconies · 雷克雅未克</div>
+        <div class="booking-detail">
+          <div class="row"><span class="label">地址</span><span><a href="#" onclick="openMaps('Hofsvallagata 55, 107 Reykjavík, Iceland');return false;" style="color:inherit;">Hofsvallagata 55, 107 Reykjavík</a></span></div>
+          <div class="row"><span class="label">入住</span><span>9月25日 16:00</span></div>
+          <div class="row"><span class="label">退房</span><span>10月3日 09:00</span></div>
+          <div class="row"><span class="label">人数</span><span>6人</span></div>
+          <div class="row"><span class="label">房东</span><span>Edda</span></div>
+          <div class="row"><span class="label">电话</span><span>+354 864 0614</span></div>
+        </div>
+        <span class="booking-status">已确认</span>
+      </div>
+
+      <!-- Tickets -->
+
+
+      <div class="booking-card ticket">
+        <div class="booking-type">🎫 日游团 · 斯奈山</div>
+        <div class="booking-title">斯奈山国家公园小团 · Nicetravel</div>
+        <div class="booking-detail">
+          <div class="row"><span class="label">日期</span><span>9月29日（周二）</span></div>
+          <div class="row"><span class="label">接车</span><span><a href="#" onclick="openMaps('Ráðhúsið, Reykjavík, Iceland');return false;" style="color:inherit;">08:30 · 市政厅 Bus Stop 1</a></span></div>
+          <div class="row"><span class="label">人数</span><span>6人</span></div>
+          <div class="row"><span class="label">说明</span><span>小团日游，含交通和导游</span></div>
+        </div>
+        <span class="booking-status">已确认</span>
+      </div>
+
+      <div class="booking-card ticket">
+        <div class="booking-type">🎫 日游团 · 骑马</div>
+        <div class="booking-title">The Elfin Tour 精灵骑马 · Eldhestar</div>
+        <div class="booking-detail">
+          <div class="row"><span class="label">日期</span><span>9月30日（周三）</span></div>
+          <div class="row"><span class="label">接车</span><span><a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;" style="color:inherit;">08:00 · 市政厅 Vonarstræti</a></span></div>
+          <div class="row"><span class="label">人数</span><span>6人 · Level 1 入门级</span></div>
+          <div class="row"><span class="label">说明</span><span>冰岛马骑行，约2-3小时，含装备</span></div>
+        </div>
+        <span class="booking-status">已确认</span>
+      </div>
+
+      <div class="booking-card ticket">
+        <div class="booking-type">🎫 日游团 · 黄金圈</div>
+        <div class="booking-title">黄金圈+蓝瀑布+火山口 · Troll 巨人旅行</div>
+        <div class="booking-detail">
+          <div class="row"><span class="label">日期</span><span>9月27日（周日）</span></div>
+          <div class="row"><span class="label">接车</span><span><a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;" style="color:inherit;">09:00 · 市政厅 Bus Stop 1</a></span></div>
+          <div class="row"><span class="label">人数</span><span>6人</span></div>
+          <div class="row"><span class="label">包含</span><span>辛格维利尔+间歇泉+黄金瀑布+蓝瀑布+火山口</span></div>
+        </div>
+        <span class="booking-status">已确认</span>
+      </div>
+
+      <div class="booking-card ticket">
+        <div class="booking-type">🎫 夜间活动 · 极光</div>
+        <div class="booking-title">极光狩猎小巴团 · Troll 巨人旅行</div>
+        <div class="booking-detail">
+          <div class="row"><span class="label">日期</span><span>9月25日（周五）晚</span></div>
+          <div class="row"><span class="label">接车</span><span><a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;" style="color:inherit;">22:00 · 市政厅 Bus Stop 1</a></span></div>
+          <div class="row"><span class="label">人数</span><span>6人</span></div>
+          <div class="row"><span class="label">包含</span><span>小巴追极光+热巧克力+免费照片</span></div>
+          <div class="row"><span class="label">提醒</span><span>当天中午确认是否出发，看不到可免费再参加</span></div>
+        </div>
+        <span class="booking-status">已确认</span>
+      </div>
+
+      <div class="booking-card ticket">
+        <div class="booking-type">🎫 日游团 · 南岸冰河湖</div>
+        <div class="booking-title">南岸 + 冰河湖一日游 · BusTravel Iceland</div>
+        <div class="booking-detail">
+          <div class="row"><span class="label">日期</span><span>10月1日（周四）</span></div>
+          <div class="row"><span class="label">接车</span><span><a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;" style="color:inherit;">07:00 · 市政厅 Vonarstræti</a></span></div>
+          <div class="row"><span class="label">人数</span><span>6人</span></div>
+          <div class="row"><span class="label">包含</span><span>塞里雅兰瀑布+黑沙滩+冰河湖+钻石海滩</span></div>
+          <div class="row"><span class="label">提醒</span><span>车程很长，早出晚归，带零食</span></div>
+        </div>
+        <span class="booking-status">已确认</span>
+      </div>
+
+      <!-- 赫尔辛基中转 -->
+      <div class="booking-card ticket">
+        <div class="booking-type">🛫 回程中转 · 赫尔辛基</div>
+        <div class="booking-title">9小时35分过夜中转 · 逛吃攻略</div>
+        <div class="booking-detail">
+          <div class="row"><span class="label">时间</span><span>10/3 15:00 到 → 10/4 00:35 飞</span></div>
+          <div class="row"><span class="label">交通</span><span>机场火车到市中心约30分钟，单程5欧左右</span></div>
+          <div class="row"><span class="label">建议</span><span>有申根签可以出机场逛，没有就在机场休息</span></div>
+        </div>
+        <span class="booking-status">已规划</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== Daily Itinerary ===== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📅</span> 逐日行程</div>
+    <button class="expand-all-btn" onclick="toggleAllDays()">展开 / 收起全部</button>
+
+    <!-- Day 1 -->
+    <div class="day-block day1" id="day1">
+      <div class="day-header day1" onclick="toggleDay('day1')">
+        <div class="day-info">
+          <div class="day-num">第 1 天 · 9月25日 周五</div>
+          <div class="day-route">抵达凯夫拉维克 → 雷克雅未克</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="day-stats">
+            <div class="drive">✈️ 07:50 抵达</div>
+            <div>宿：雷克雅未克</div>
+          </div>
+          <span class="day-expand-arrow">▼</span>
+        </div>
+      </div>
+      <div class="day-content">
+        <div class="day-map-btn">
+          <a href="#" onclick="openMapsDirections(['Keflavík International Airport','Hofsvallagata 55, 107 Reykjavík, Iceland']);return false;" class="nav-btn">🧭 一键导航全天</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">07:50</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Keflavík International Airport');return false;">抵达凯夫拉维克机场 KEF</a></div>
+            <div class="timeline-desc">AY0991 航班落地。入境、取行李。</div>
+            <span class="timeline-tag">芬兰航空 AY0991</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">08:30</div>
+            <div class="timeline-title">前往雷克雅未克市区</div>
+            <div class="timeline-desc">机场到市区约45分钟车程。旅行团接车或自行前往。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">10:00</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Hofsvallagata 55, 107 Reykjavík, Iceland');return false;">抵达 Airbnb</a></div>
+            <div class="timeline-desc">16:00后才能入住，可以先把行李寄存，出去逛逛。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">上午</div>
+            <div class="timeline-title">市区闲逛 · 倒时差</div>
+            <div class="timeline-desc">放下行李后在附近走走，熟悉环境，别安排太满。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">傍晚</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Hallgrímskirkja, Reykjavík');return false;">哈尔格林姆斯大教堂 &amp; 市区逛逛</a></div>
+            <div class="timeline-desc">从民宿走路10分钟到教堂。Laugavegur主街逛逛，吃晚餐。</div>
+            <span class="timeline-tag free">免费外观</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">晚上</div>
+            <div class="timeline-title">晚餐 · 休息一下</div>
+            <div class="timeline-desc">早点吃晚餐，晚上还有极光团。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">21:35</div>
+            <div class="timeline-title">出门 · 步行去接车点</div>
+            <div class="timeline-desc">从民宿走到市政厅约12-15分钟，多穿点，晚上冷。</div>
+            <span class="timeline-tag warn">🧥 多穿点</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">21:50</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;">到达接车点 Bus Stop 1</a></div>
+            <div class="timeline-desc">市政厅 Vonarstræti 侧。22:00开始接人，等Troll Expeditions的车。</div>
+            <span class="timeline-tag">Troll 巨人旅行</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">22:00</div>
+            <div class="timeline-title">极光狩猎 Northern Lights Hunt</div>
+            <div class="timeline-desc">小巴追极光，含热巧克力和免费照片。约3小时。⚠️ 极光是自然现象，当天中午才确认是否出发，看预报决定。如果看不到可以免费再参加一次。</div>
+            <span class="timeline-tag book">已确认 · 6人</span>
+            <span class="timeline-tag warn">看运气</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">约01:00</div>
+            <div class="timeline-title">返回市区 · 回民宿</div>
+            <div class="timeline-desc">回到市区约凌晨1点左右，直接回去睡觉。第二天不用早起。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-block day2" id="day2">
+      <div class="day-header day2" onclick="toggleDay('day2')">
+        <div class="day-info">
+          <div class="day-num">第 2 天 · 9月26日 周六</div>
+          <div class="day-route">雷克雅未克自由活动</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="day-stats">
+            <div class="drive">🚶 自由日</div>
+            <div>宿：雷克雅未克</div>
+          </div>
+          <span class="day-expand-arrow">▼</span>
+        </div>
+      </div>
+      <div class="day-content">
+        <div class="day-map-btn">
+          <a href="#" onclick="openMaps('Reykjavík, Iceland');return false;" class="nav-btn">📍 雷克雅未克市区</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">上午</div>
+            <div class="timeline-title">睡到自然醒 · 倒时差</div>
+            <div class="timeline-desc">前一天长途飞行，好好休息。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">中午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Hallgrímskirkja, Reykjavík');return false;">哈尔格林姆斯大教堂</a></div>
+            <div class="timeline-desc">登顶看全城（门票约1200克朗）。教堂旁边就是市中心。</div>
+            <span class="timeline-tag book">登顶 1200 ISK</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">下午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Laugavegur, Reykjavík');return false;">Laugavegur 主街购物</a></div>
+            <div class="timeline-desc">雷克雅未克最热闹的商业街，买伴手礼、逛设计店、喝咖啡。</div>
+            <span class="timeline-tag free">免费</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">下午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Harpa Concert Hall, Reykjavík');return false;">Harpa 音乐厅</a></div>
+            <div class="timeline-desc">玻璃幕墙的现代建筑，拍照很好看。可以免费进去参观。</div>
+            <span class="timeline-tag free">免费参观</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">傍晚</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Sun Voyager, Reykjavík');return false;">太阳航海者 Sólfar</a></div>
+            <div class="timeline-desc">海边的维京船骨架雕塑，日落时分最美。免费。</div>
+            <span class="timeline-tag free">免费</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">晚上</div>
+            <div class="timeline-title">晚餐</div>
+            <div class="timeline-desc">推荐尝尝冰岛特色餐厅，比如烤羊排或海鲜。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day-block day3" id="day3">
+      <div class="day-header day3" onclick="toggleDay('day3')">
+        <div class="day-info">
+          <div class="day-num">第 3 天 · 9月27日 周日</div>
+          <div class="day-route">黄金圈 + 蓝瀑布 + 凯瑞斯火山口 · Troll 小团</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="day-stats">
+            <div class="drive">🚌 跟团 09:00 接车</div>
+            <div>宿：雷克雅未克</div>
+          </div>
+          <span class="day-expand-arrow">▼</span>
+        </div>
+      </div>
+      <div class="day-content">
+        <div class="day-map-btn">
+          <a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;" class="nav-btn">📍 接车点：市政厅</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">08:20</div>
+            <div class="timeline-title">出门 · 步行去接车点</div>
+            <div class="timeline-desc">从民宿走到市政厅约12-15分钟。</div>
+            <span class="timeline-tag warn">⏰ 提前到</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">08:40</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;">到达接车点 Bus Stop 1</a></div>
+            <div class="timeline-desc">市政厅 Vonarstræti 侧。09:00开始接人，接车过程30-40分钟。找写着"Troll Expeditions"的车。</div>
+            <span class="timeline-tag">Troll 巨人旅行</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">上午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Thingvellir National Park, Iceland');return false;">辛格维利尔国家公园</a></div>
+            <div class="timeline-desc">联合国世界遗产，北美与亚欧板块裂缝。黄金圈第一站。</div>
+            <span class="timeline-tag free">免费</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">中午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Geysir Geothermal Area, Iceland');return false;">盖歇尔间歇泉</a></div>
+            <div class="timeline-desc">Strokkur间歇泉每10-15分钟喷发一次。</div>
+            <span class="timeline-tag free">免费</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">下午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Gullfoss, Iceland');return false;">黄金瀑布 Gullfoss</a></div>
+            <div class="timeline-desc">冰岛最壮观的瀑布之一，双层落差32米。</div>
+            <span class="timeline-tag free">免费</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">下午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Bruarfoss, Iceland');return false;">蓝瀑布 Bruarfoss</a></div>
+            <div class="timeline-desc">冰岛最蓝的瀑布，Tiffany蓝的颜色很特别。</div>
+            <span class="timeline-tag free">免费</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">下午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Kerið Crater, Iceland');return false;">凯瑞斯火山口 Kerið</a></div>
+            <div class="timeline-desc">红色火山岩环绕的蓝色火山口湖。</div>
+            <span class="timeline-tag book">含门票</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">傍晚</div>
+            <div class="timeline-title">返回雷克雅未克</div>
+            <div class="timeline-desc">通常18:00-19:00左右回到市区。回民宿休息。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day-block day4" id="day4">
+      <div class="day-header day4" onclick="toggleDay('day4')">
+        <div class="day-info">
+          <div class="day-num">第 4 天 · 9月28日 周一</div>
+          <div class="day-route">自由活动 · 待定</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="day-stats">
+            <div class="drive">🚶 自由日</div>
+            <div>宿：雷克雅未克</div>
+          </div>
+          <span class="day-expand-arrow">▼</span>
+        </div>
+      </div>
+      <div class="day-content">
+        <div class="day-map-btn">
+          <a href="#" onclick="return false;" class="nav-btn" style="opacity:0.5;pointer-events:none;">📌 等其他团确认</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">待定</div>
+            <div class="timeline-title">自由活动 / 另一个日游团</div>
+            <div class="timeline-desc">等你发剩下的团票。</div>
+            <span class="timeline-tag warn">待确认</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">备选</div>
+            <div class="timeline-title">推荐：南岸一日游</div>
+            <div class="timeline-desc">塞里雅兰瀑布、斯科加瀑布、黑沙滩，经典南岸风光。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 5 斯奈山 -->
+    <div class="day-block day5" id="day5">
+      <div class="day-header day5" onclick="toggleDay('day5')">
+        <div class="day-info">
+          <div class="day-num">第 5 天 · 9月29日 周二</div>
+          <div class="day-route">斯奈山国家公园日游 · Nicetravel 小团</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="day-stats">
+            <div class="drive">🚌 跟团 08:30 接车</div>
+            <div>宿：雷克雅未克</div>
+          </div>
+          <span class="day-expand-arrow">▼</span>
+        </div>
+      </div>
+      <div class="day-content">
+        <div class="day-map-btn">
+          <a href="#" onclick="openMaps('Ráðhúsið, Reykjavík, Iceland');return false;" class="nav-btn">📍 接车点：市政厅</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">07:45</div>
+            <div class="timeline-title">出门 · 步行去接车点</div>
+            <div class="timeline-desc">从民宿走到市政厅约12-15分钟，早点出门别迟到。</div>
+            <span class="timeline-tag warn">⏰ 提前15分钟到</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">08:15</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Ráðhúsið, Reykjavík, Iceland');return false;">到达接车点 Bus Stop 1</a></div>
+            <div class="timeline-desc">市政厅（Ráðhúsið / City Hall）公交站。08:30-09:00之间来接，提前到等着。</div>
+            <span class="timeline-tag">Nicetravel 小团</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">全天</div>
+            <div class="timeline-title">斯奈山国家公园日游</div>
+            <div class="timeline-desc">冰岛缩影，一天看遍火山、冰川、瀑布、黑沙滩、海边悬崖。经典景点：教会山Kirkjufell、Arnarstapi悬崖、Djúpalónssandur黑沙滩、斯奈山冰川。</div>
+            <span class="timeline-tag book">已确认 · 6人</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">傍晚</div>
+            <div class="timeline-title">返回雷克雅未克</div>
+            <div class="timeline-desc">通常18:00-19:00左右回到市区。回民宿休息。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 6 骑马 -->
+    <div class="day-block day6" id="day6">
+      <div class="day-header day6" onclick="toggleDay('day6')">
+        <div class="day-info">
+          <div class="day-num">第 6 天 · 9月30日 周三</div>
+          <div class="day-route">冰岛马骑行 · Eldhestar 精灵之旅</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="day-stats">
+            <div class="drive">🐴 跟团 08:00 接车</div>
+            <div>宿：雷克雅未克</div>
+          </div>
+          <span class="day-expand-arrow">▼</span>
+        </div>
+      </div>
+      <div class="day-content">
+        <div class="day-map-btn">
+          <a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;" class="nav-btn">📍 接车点：市政厅 Vonarstræti</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">07:15</div>
+            <div class="timeline-title">出门 · 步行去接车点</div>
+            <div class="timeline-desc">从民宿走到市政厅Vonarstræti侧约15分钟。</div>
+            <span class="timeline-tag warn">⏰ 提前到</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">07:45</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;">到达接车点 Bus Stop 1</a></div>
+            <div class="timeline-desc">市政厅 Vonarstræti 侧。08:00接车，司机可能最晚8:30到，耐心等。</div>
+            <span class="timeline-tag">Eldhestar</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">上午</div>
+            <div class="timeline-title">The Elfin Tour 精灵骑马之旅</div>
+            <div class="timeline-desc">冰岛特色的冰岛马骑行，经过熔岩地貌和乡村。Level 1 入门级，适合新手。骑行约2-3小时，含装备。</div>
+            <span class="timeline-tag book">已确认 · 6人 · Level 1</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">下午</div>
+            <div class="timeline-title">返回雷克雅未克</div>
+            <div class="timeline-desc">骑马后送回市区。下午可以休息或继续逛。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">晚上</div>
+            <div class="timeline-title">休息</div>
+            <div class="timeline-desc">骑完马可能大腿会酸，好好休息～</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 7 -->
+    <div class="day-block day7" id="day7">
+      <div class="day-header day7" onclick="toggleDay('day7')">
+        <div class="day-info">
+          <div class="day-num">第 7 天 · 10月1日 周四</div>
+          <div class="day-route">南岸 + 冰河湖一日游 · BusTravel</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="day-stats">
+            <div class="drive">🚌 跟团 07:00 接车</div>
+            <div>宿：雷克雅未克</div>
+          </div>
+          <span class="day-expand-arrow">▼</span>
+        </div>
+      </div>
+      <div class="day-content">
+        <div class="day-map-btn">
+          <a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;" class="nav-btn">📍 接车点：市政厅</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">06:00</div>
+            <div class="timeline-title">起床 · 早餐</div>
+            <div class="timeline-desc">今天出发很早！6点起床，简单吃点早餐，带点路上吃的零食。</div>
+            <span class="timeline-tag warn">⏰ 早起</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">06:30</div>
+            <div class="timeline-title">出门 · 步行去接车点</div>
+            <div class="timeline-desc">从民宿走到市政厅约12-15分钟，天还没亮，注意安全。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">06:45</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Vonarstræti, Reykjavík, Iceland');return false;">到达接车点 Bus Stop 1</a></div>
+            <div class="timeline-desc">市政厅 Vonarstræti 侧。07:00-07:30之间来接，提前到等着。</div>
+            <span class="timeline-tag">BusTravel Iceland</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">上午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Seljalandsfoss, Iceland');return false;">塞里雅兰瀑布 &amp; 斯科加瀑布</a></div>
+            <div class="timeline-desc">南岸两大经典瀑布。塞里雅兰可以走到瀑布后面，斯科加瀑布可以爬楼梯到顶。</div>
+            <span class="timeline-tag free">免费</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">中午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Reynisfjara Black Sand Beach, Iceland');return false;">雷尼斯黑沙滩</a></div>
+            <div class="timeline-desc">世界最美非热带海滩之一，玄武岩柱。⚠️ 绝对不要背对大海！</div>
+            <span class="timeline-tag free">免费</span>
+            <span class="timeline-tag warn">⚠️ 致命暗流</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">下午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Jökulsárlón Glacier Lagoon, Iceland');return false;">杰古沙龙冰河湖 Jökulsárlón</a></div>
+            <div class="timeline-desc">冰岛最梦幻的景点！巨大冰山漂浮在湖面上。南岸行程的高潮。</div>
+            <span class="timeline-tag free">免费观赏</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">下午</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Diamond Beach, Iceland');return false;">钻石海滩</a></div>
+            <div class="timeline-desc">冰河湖对面，冰块散落在黑沙滩上像钻石。拍照超美。</div>
+            <span class="timeline-tag free">免费</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">傍晚</div>
+            <div class="timeline-title">返回雷克雅未克</div>
+            <div class="timeline-desc">车程很长，回到市区大概晚上8-9点。在车上补觉吧。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">约21:00</div>
+            <div class="timeline-title">回到市区 · 回民宿</div>
+            <div class="timeline-desc">累了一天，好好休息。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 8 -->
+    <div class="day-block day8" id="day8">
+      <div class="day-header day8" onclick="toggleDay('day8')">
+        <div class="day-info">
+          <div class="day-num">第 8 天 · 10月2日 周五</div>
+          <div class="day-route">自由活动 · 收拾行李</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="day-stats">
+            <div class="drive">🚶 自由日</div>
+            <div>宿：雷克雅未克</div>
+          </div>
+          <span class="day-expand-arrow">▼</span>
+        </div>
+      </div>
+      <div class="day-content">
+        <div class="day-map-btn">
+          <a href="#" onclick="return false;" class="nav-btn" style="opacity:0.5;pointer-events:none;">📌 等其他团确认</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">上午</div>
+            <div class="timeline-title">自由活动 / 另一个日游团</div>
+            <div class="timeline-desc">如果有第5个团就安排在今天上午。</div>
+            <span class="timeline-tag warn">待确认</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">下午</div>
+            <div class="timeline-title">最后采购伴手礼</div>
+            <div class="timeline-desc">蓝湖面膜、冰岛羊毛制品、巧克力、鱼油。Laugavegur主街或Kringlan商场。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">晚上</div>
+            <div class="timeline-title">收拾行李 · 早点休息</div>
+            <div class="timeline-desc">明天早上5点就要出发去机场，今晚早点睡。确认钥匙放在哪、退房方式。</div>
+            <span class="timeline-tag warn">⏰ 明天早起</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 9 离境 -->
+    <div class="day-block day9" id="day9">
+      <div class="day-header day9" onclick="toggleDay('day9')">
+        <div class="day-info">
+          <div class="day-num">第 9 天 · 10月3日 周六</div>
+          <div class="day-route">雷克雅未克 → 凯夫拉维克机场 → 赫尔辛基</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="day-stats">
+            <div class="drive">✈️ 08:40 起飞</div>
+            <div>中转赫尔辛基</div>
+          </div>
+          <span class="day-expand-arrow">▼</span>
+        </div>
+      </div>
+      <div class="day-content">
+        <div class="day-map-btn">
+          <a href="#" onclick="openMapsDirections(['Hofsvallagata 55, 107 Reykjavík, Iceland','Keflavík International Airport']);return false;" class="nav-btn">🧭 前往机场</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">05:00</div>
+            <div class="timeline-title">起床 · 退房</div>
+            <div class="timeline-desc">航班08:40起飞，提前3小时到机场。跟房东确认退房方式（钥匙放哪）。</div>
+            <span class="timeline-tag warn">⏰ 早起</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">05:30</div>
+            <div class="timeline-title">出发前往机场</div>
+            <div class="timeline-desc">从民宿到KEF约50分钟车程。提前订好送机或打车。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">06:30</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Keflavík International Airport');return false;">抵达凯夫拉维克机场</a></div>
+            <div class="timeline-desc">值机、退税、安检。机场免税店可以最后采购。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">08:40</div>
+            <div class="timeline-title">AY0992 起飞 · 前往赫尔辛基</div>
+            <div class="timeline-desc">飞行约3小时。冰岛时间08:40 → 赫尔辛基时间15:00。</div>
+            <span class="timeline-tag">芬兰航空 AY0992</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 赫尔辛基中转 -->
+    <div class="day-block day10" id="day10">
+      <div class="day-header day10" onclick="toggleDay('day10')">
+        <div class="day-info">
+          <div class="day-num">中转 · 10月3-4日</div>
+          <div class="day-route">赫尔辛基过夜中转 9h35m</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="day-stats">
+            <div class="drive">✈️ 00:35 飞香港</div>
+            <div>可选出机场</div>
+          </div>
+          <span class="day-expand-arrow">▼</span>
+        </div>
+      </div>
+      <div class="day-content">
+        <div class="day-map-btn">
+          <a href="#" onclick="openMaps('Helsinki Central Station, Finland');return false;" class="nav-btn">📍 赫尔辛基市中心</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">15:00</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Helsinki Vantaa Airport, Finland');return false;">抵达赫尔辛基万塔机场 HEL</a></div>
+            <div class="timeline-desc">下飞机后，有申根签的可以出机场，没有的就在机场休息。</div>
+            <span class="timeline-tag warn">需申根签才能出机场</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">15:30</div>
+            <div class="timeline-title">机场火车 → 市中心</div>
+            <div class="timeline-desc">P或I线火车，到中央车站约30分钟，单程约5欧元。班次很密。</div>
+            <span class="timeline-tag">30分钟</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">16:00</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Helsinki Cathedral, Finland');return false;">赫尔辛基大教堂</a></div>
+            <div class="timeline-desc">白色新古典主义大教堂，赫尔辛基地标。参议院广场拍照。免费。</div>
+            <span class="timeline-tag free">免费</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">17:00</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Market Square Helsinki, Finland');return false;">集市广场 Kauppatori</a></div>
+            <div class="timeline-desc">海边集市，可以尝芬兰特色小吃、驯鹿肉汉堡、莓子。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">18:00</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Esplanadi, Helsinki, Finland');return false;">埃斯普拉纳迪公园 &amp; 主街购物</a></div>
+            <div class="timeline-desc">赫尔辛基最美的林荫大道。旁边有Stockmann百货，可以买姆明和芬兰设计品。</div>
+            <span class="timeline-tag free">免费</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">19:30</div>
+            <div class="timeline-title">晚餐</div>
+            <div class="timeline-desc">推荐尝尝芬兰特色：驯鹿肉、三文鱼汤、肉桂卷。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">21:30</div>
+            <div class="timeline-title">返回机场</div>
+            <div class="timeline-desc">火车约30分钟，建议22:30前到机场。值机、安检。</div>
+            <span class="timeline-tag warn">预留充足时间</span>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">00:35</div>
+            <div class="timeline-title">AY0099 起飞 · 返回香港</div>
+            <div class="timeline-desc">飞行约11小时。10月4日 17:40 抵达香港T1。</div>
+            <span class="timeline-tag">芬兰航空 AY0099</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Todo List ===== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📋</span> 待办清单</div>
+    <div class="todo-list">
+      <div class="todo-item done">
+        <span class="todo-bullet"></span>
+        <div>
+          <div>确认往返机票（芬兰航空）</div>
+          <div class="todo-note">9/25抵达，10/3返程，赫尔辛基中转</div>
+        </div>
+      </div>
+      <div class="todo-item done">
+        <span class="todo-bullet"></span>
+        <div>确认住宿（Airbnb · 雷克雅未克8晚）</div>
+        <div class="todo-note">Hofsvallagata 55, 6人，房东Edda</div>
+      </div>
+      <div class="todo-item done">
+        <span class="todo-bullet"></span>
+        <div>确认极光狩猎（Troll · 9/25晚）</div>
+        <div class="todo-note">市政厅22:00接车，小巴团，含热巧克力</div>
+      </div>
+      <div class="todo-item done">
+        <span class="todo-bullet"></span>
+        <div>确认黄金圈日游（Troll · 9/27）</div>
+        <div class="todo-note">市政厅09:00接车，含火山口+蓝瀑布</div>
+      </div>
+      <div class="todo-item done">
+        <span class="todo-bullet"></span>
+        <div>确认斯奈山日游（Nicetravel · 9/29）</div>
+        <div class="todo-note">市政厅08:30接车，6人小团</div>
+      </div>
+      <div class="todo-item done">
+        <span class="todo-bullet"></span>
+        <div>确认冰岛骑马之旅（Eldhestar · 9/30）</div>
+        <div class="todo-note">市政厅08:00接车，Level 1入门级</div>
+      </div>
+      <div class="todo-item done">
+        <span class="todo-bullet"></span>
+        <div>确认南岸冰河湖日游（BusTravel · 10/1）</div>
+        <div class="todo-note">市政厅07:00接车，早出晚归，车程长</div>
+      </div>
+
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>办理冰岛签证（申根签）</div>
+        <div class="todo-note">提前3个月申请。跟团的话旅行社会帮忙准备材料</div>
+      </div>
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>购买旅行保险</div>
+        <div class="todo-note">必须覆盖医疗和意外救援</div>
+      </div>
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>换冰岛克朗或准备全币种信用卡</div>
+        <div class="todo-note">冰岛基本刷卡全覆盖，但少量现金备用</div>
+      </div>
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>下载离线地图（Google Maps / Maps.me）</div>
+        <div class="todo-note">东部峡湾很多地方没信号</div>
+      </div>
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>准备防水外套和登山鞋</div>
+        <div class="todo-note">冰岛天气说变就变，防水是第一要务</div>
+      </div>
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>准备泳衣（蓝湖/米湖温泉用）</div>
+        <div class="todo-note">蓝湖温泉内可以租，但自己带更卫生</div>
+      </div>
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>买欧洲电话卡或开通国际漫游</div>
+        <div class="todo-note">跟团也需要网络查信息、联系导游</div>
+      </div>
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>赫尔辛基中转：确认是否有申根签</div>
+        <div class="todo-note">有申根签可以出机场逛赫尔辛基，没有就只能在机场休息</div>
+      </div>
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>转换插头（欧标两圆孔 Type F）</div>
+        <div class="todo-note">冰岛和芬兰都是欧标</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tips ===== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">💡</span> 实用贴士</div>
+    <div class="tips-grid">
+
+      <div class="tip-card">
+        <h4>🚌 跟团贴士</h4>
+        <p>• 每天出发前确认集合时间和地点，不要迟到<br>
+        • 大巴车上备一件外套，空调可能比较冷<br>
+        • 晕车的提前吃药，冰岛山路弯道多<br>
+        • 每天行程可能因天气调整，以导游安排为准<br>
+        • 小费：冰岛没有给小费的习惯，团费已含服务费<br>
+        • 保存好导游和旅行社的紧急联系电话</p>
+      </div>
+
+      <div class="tip-card">
+        <h4>🛫 赫尔辛基中转</h4>
+        <p>• 9小时35分过夜中转，有申根签可以出市区逛<br>
+        • 机场P/I线火车到市中心30分钟，约5欧<br>
+        • 必去：赫尔辛基大教堂、集市广场、Esplanadi公园<br>
+        • 必吃：驯鹿肉、三文鱼汤、肉桂卷、莓子<br>
+        • 购物：Stockmann百货、姆明周边、芬兰设计品<br>
+        • 没申根签的话机场也有免税店和休息区<br>
+        • 记得22:30前回到机场，预留充足值机时间</p>
+      </div>
+
+      <div class="tip-card">
+        <h4>🌌 极光狩猎贴士</h4>
+        <p>• 9月是看极光的好季节，晚上10点后开始活跃<br>
+        • 穿暖和！零下温度等几小时真的很冷，帽子手套围巾必备<br>
+        • 带三脚架，手机拍不清楚极光，相机长曝光才行<br>
+        • 当天中午导游会确认是否出发，看极光预报<br>
+        • 如果看不到极光，Troll的团可以免费再参加一次<br>
+        • 查极光预报：vedur.is 有极光活动指数（KP值）<br>
+        • 手机开飞行模式省电，野外信号差很耗电</p>
+      </div>
+
+      <div class="tip-card">
+        <h4>🌤️ 天气</h4>
+        <p>• 冰岛天气一天变四季，出门必带防水外套<br>
+        • 穿衣法则：三层穿法（排汗内层+保暖中层+防水外层）<br>
+        • 夏季（6-8月）气温10-15度，午夜不黑（极昼）<br>
+        • 冬季（12-2月）气温0到-5度，日照短但有极光<br>
+        • 查天气：vedur.is（冰岛气象局，最准）</p>
+      </div>
+
+      <div class="tip-card">
+        <h4>💰 省钱攻略</h4>
+        <p>• 超市首选Bónus（粉色小猪），最便宜<br>
+        • 加油站选N1或Orkan，自助加油用芯片卡<br>
+        • 吃饭尽量中午吃套餐（便宜），晚上自己做<br>
+        • 很多景点免费，停车大多收费（750-1000克朗）<br>
+        • 退税：单店满6000克朗可退，机场退</p>
+      </div>
+
+      <div class="tip-card">
+        <h4>📱 网络与通讯</h4>
+        <p>• 机场可买SIM卡（Númer或Vodafone），10天约30-40欧元<br>
+        • 大部分酒店有WiFi但速度一般<br>
+        • 东部峡湾、高地很多地方没信号，提前下离线地图<br>
+        • 紧急电话：112（警察/消防/急救通用）</p>
+      </div>
+
+      <div class="tip-card">
+        <h4>🍽️ 饮食</h4>
+        <p>• 必吃：冰岛酸奶Skyr、羊肉汤、龙虾汤、黑麦面包<br>
+        • 餐厅人均：正餐约3000-5000克朗（150-250人民币）<br>
+        • 咖啡：约600-800克朗一杯<br>
+        • 自来水可以直接喝，是冰川水，世界最好的之一<br>
+        • 超市买酒需要去专门的Vínbúðin（国营酒铺）</p>
+      </div>
+
+      <div class="tip-card">
+        <h4>⏰ 时差与营业时间</h4>
+        <p>• 冰岛全年GMT+0（不实行夏令时）<br>
+        • 比北京晚8小时（冬季）/ 7小时（夏季北京夏令时）<br>
+        • 超市一般10:00-19:00，周日更短<br>
+        • 加油站商店开到很晚，有些24小时<br>
+        • 博物馆大多周一闭馆，出发前查好</p>
+      </div>
+
+      <div class="tip-card">
+        <h4>⚠️ 安全提醒</h4>
+        <p>• 黑沙滩绝对不要背对大海！sneaker wave可以卷走人<br>
+        • 瀑布附近的石头很滑，不要越过分界线<br>
+        • 冰川徒步必须跟向导，不要自己走上去<br>
+        • 泡温泉前先洗澡裸冲，这是冰岛规定<br>
+        • 下载112 Iceland APP，可以一键定位求助</p>
+      </div>
+
+      <div class="tip-card">
+        <h4>🎒 打包清单</h4>
+        <p>• 防水冲锋衣 + 防水裤（必备！）<br>
+        • 登山鞋/防水徒步鞋<br>
+        • 泳衣（蓝湖、米湖温泉用）<br>
+        • 墨镜、防晒霜（夏季极昼，紫外线强）<br>
+        • 转换插头：欧标两圆孔（Type F）<br>
+        • 车载手机支架（导航用）<br>
+        • 充电宝、相机、三脚架（拍极光用）</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <div class="footer">
+    🇮🇸 冰岛9日旅行手册 · 6人同行 · 芬兰航空<br>
+    页面内所有地点可点击，直接唤起 Google 地图导航
+  </div>
+
+</div>
+
+<script>
+// ====== Configuration ======
+// 出发日期（冰岛时区，GMT+0）
+// 基于芬兰航空真实航班
+const TRIP_START = '2026-09-25T07:50:00Z'; // 抵达凯夫拉维克机场
+const ICELAND_TZ = 'GMT';
+
+// 行程事件列表（按时间顺序），用于"此刻关注"倒计时
+// 所有时间用ISO 8601格式，Z表示UTC（冰岛就是UTC/GMT）
+// 注意：赫尔辛基中转用东二时区时间
+const itineraryEvents = [
+  { time: '2026-09-25T07:50:00Z', label: '抵达凯夫拉维克机场', day: 1 },
+  { time: '2026-09-25T22:00:00Z', label: '极光狩猎 · 接车', day: 1 },
+  { time: '2026-09-27T09:00:00Z', label: '黄金圈日游 · 接车', day: 3 },
+  { time: '2026-09-29T08:30:00Z', label: '斯奈山日游 · 接车', day: 5 },
+  { time: '2026-09-30T08:00:00Z', label: '冰岛骑马之旅 · 接车', day: 6 },
+  { time: '2026-10-01T07:00:00Z', label: '南岸冰河湖日游 · 接车', day: 7 },
+  { time: '2026-10-03T08:40:00Z', label: '返程航班起飞 · AY0992', day: 9 },
+  { time: '2026-10-03T13:00:00Z', label: '赫尔辛基中转 · 出市区逛逛', day: 9 },
+  { time: '2026-10-03T21:35:00Z', label: '回香港航班起飞 · AY0099', day: 10 },
+];
+
+// ====== Countdown ======
+function updateCountdown() {
+  const now = new Date();
+  let nextEvent = null;
+
+  for (const event of itineraryEvents) {
+    const eventTime = new Date(event.time);
+    if (eventTime > now) {
+      nextEvent = event;
+      break;
+    }
+  }
+
+  if (!nextEvent) {
+    // 所有事件都已过
+    document.getElementById('nextEvent').textContent = '行程已结束，期待下次旅行 ✨';
+    document.getElementById('cdDays').textContent = '0';
+    document.getElementById('cdHours').textContent = '0';
+    document.getElementById('cdMins').textContent = '0';
+    document.getElementById('cdSecs').textContent = '0';
+    return;
+  }
+
+  const diff = new Date(nextEvent.time) - now;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('nextEvent').textContent = nextEvent.label;
+  document.getElementById('cdDays').textContent = days;
+  document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cdMins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cdSecs').textContent = String(secs).padStart(2, '0');
+}
+
+// 初始化并每秒更新
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// 显示当前冰岛时间
+function updateIcelandTime() {
+  const now = new Date();
+  const icelandTime = now.toLocaleString('zh-CN', {
+    timeZone: 'Atlantic/Reykjavik',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+  document.getElementById('cdTz').textContent = `冰岛时间 ${icelandTime} (GMT+0)`;
+}
+updateIcelandTime();
+setInterval(updateIcelandTime, 60000);
+
+// ====== Google Maps Navigation ======
+function openMaps(query) {
+  const encoded = encodeURIComponent(query);
+  // 检测是否移动设备
+  const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (isMobile) {
+    // 尝试唤起App
+    window.location.href = `comgooglemaps://?q=${encoded}`;
+    // 如果App没打开，回退到网页版
+    setTimeout(() => {
+      window.location.href = `https://www.google.com/maps/search/?api=1&query=${encoded}`;
+    }, 500);
+  } else {
+    window.open(`https://www.google.com/maps/search/?api=1&query=${encoded}`, '_blank');
+  }
+}
+
+function openMapsDirections(waypoints) {
+  if (!waypoints || waypoints.length < 2) return;
+  const origin = encodeURIComponent(waypoints[0]);
+  const destination = encodeURIComponent(waypoints[waypoints.length - 1]);
+  let url;
+
+  const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (waypoints.length === 2) {
+    if (isMobile) {
+      url = `comgooglemaps://?saddr=${origin}&daddr=${destination}&directionsmode=driving`;
+    } else {
+      url = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
+    }
+  } else {
+    const middle = waypoints.slice(1, -1).map(w => encodeURIComponent(w)).join('|');
+    if (isMobile) {
+      // 移动版多点导航
+      url = `comgooglemaps://?saddr=${origin}&daddr=${destination}&waypoints=${middle}&directionsmode=driving`;
+    } else {
+      url = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&waypoints=${middle}&travelmode=driving`;
+    }
+  }
+
+  if (isMobile) {
+    window.location.href = url;
+    setTimeout(() => {
+      // 回退到网页版
+      const webUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
+      window.location.href = webUrl;
+    }, 500);
+  } else {
+    window.open(url, '_blank');
+  }
+  return false;
+}
+
+// ====== Day Expand/Collapse ======
+function toggleDay(dayId) {
+  const block = document.getElementById(dayId);
+  block.classList.toggle('expanded');
+}
+
+function toggleAllDays() {
+  const blocks = document.querySelectorAll('.day-block');
+  const allExpanded = Array.from(blocks).every(b => b.classList.contains('expanded'));
+  blocks.forEach(b => {
+    if (allExpanded) {
+      b.classList.remove('expanded');
+    } else {
+      b.classList.add('expanded');
+    }
+  });
+}
+
+// 默认展开第1天
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('day1').classList.add('expanded');
+});
+</script>
+
+
+
+</body></html>
