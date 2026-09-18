@@ -27,7 +27,7 @@
     --map-grid: #dce8ec;
     --map-highland: #e8e0d0;
     --map-glacier: #ffffff;
-    --countdown-bg: linear-gradient(135deg, #d4654a 0%, #e8947a 100%);
+    --countdown-bg: #ffffff;
     --radius: 14px;
     --day1: #E57373;
     --day2: #FFB74D;
@@ -61,7 +61,7 @@
       --map-grid: #253040;
       --map-highland: #3d4855;
       --map-glacier: #c8d6e5;
-      --countdown-bg: linear-gradient(135deg, #b84a32 0%, #d4654a 100%);
+      --countdown-bg: #ffffff;
     }
   }
 
@@ -174,7 +174,8 @@
   /* ===== Countdown Card ===== */
   .countdown-card {
     background: var(--countdown-bg);
-    color: white;
+    color: #d32f2f;
+    border: 2px solid #ffcdd2;
     border-radius: var(--radius);
     padding: 24px 20px;
     margin-bottom: 24px;
@@ -189,7 +190,7 @@
     right: -20%;
     width: 200px;
     height: 200px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(211,47,47,0.04);
     border-radius: 50%;
   }
   .countdown-card::after {
@@ -199,19 +200,21 @@
     left: -10%;
     width: 150px;
     height: 150px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(211,47,47,0.03);
     border-radius: 50%;
   }
   .countdown-label {
     font-size: 13px;
-    opacity: 0.9;
+    color: #d32f2f;
+    font-weight: 600;
     margin-bottom: 4px;
     position: relative;
     z-index: 1;
   }
   .countdown-event {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
+    color: #d32f2f;
     margin-bottom: 16px;
     position: relative;
     z-index: 1;
@@ -226,25 +229,28 @@
   .countdown-unit {
     flex: 1;
     text-align: center;
-    background: rgba(255,255,255,0.15);
+    background: rgba(211,47,47,0.06);
+    border: 1px solid rgba(211,47,47,0.15);
     border-radius: 10px;
     padding: 12px 4px;
-    backdrop-filter: blur(10px);
   }
   .countdown-unit .num {
     font-size: 28px;
-    font-weight: 700;
+    font-weight: 800;
+    color: #d32f2f;
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
   .countdown-unit .label {
     font-size: 11px;
+    color: #e53935;
     opacity: 0.85;
     margin-top: 4px;
   }
   .countdown-tz {
     font-size: 11px;
-    opacity: 0.7;
+    color: #d32f2f;
+    opacity: 0.75;
     text-align: center;
     margin-top: 12px;
     position: relative;
@@ -317,6 +323,16 @@
     border-radius: var(--radius);
     padding: 16px;
     box-shadow: var(--shadow);
+  }
+  .map-summary {
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  .map-summary strong {
+    color: var(--text-primary);
+    font-weight: 600;
   }
   .map-svg-container {
     width: 100%;
@@ -490,12 +506,12 @@
 
   .timeline {
     position: relative;
-    padding-left: 20px;
+    padding: 0;
   }
   .timeline::before {
     content: '';
     position: absolute;
-    left: 5px;
+    left: 79px;
     top: 4px;
     bottom: 4px;
     width: 2px;
@@ -503,22 +519,28 @@
     border-radius: 1px;
   }
   .timeline-item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 32px;
     position: relative;
     margin-bottom: 16px;
+    padding-right: 4px;
   }
   .timeline-item:last-child { margin-bottom: 0; }
   .timeline-item::before {
     content: '';
     position: absolute;
-    left: -20px;
-    top: 6px;
+    left: 74px;
+    top: 4px;
     width: 12px;
     height: 12px;
     border-radius: 50%;
     background: var(--bg-card);
     border: 3px solid;
+    box-sizing: border-box;
     z-index: 1;
   }
+  .day0 .timeline-item::before,
   .day1 .timeline-item::before { border-color: var(--day1); }
   .day2 .timeline-item::before { border-color: var(--day2); }
   .day3 .timeline-item::before { border-color: var(--day3); }
@@ -531,15 +553,31 @@
   .day10 .timeline-item::before { border-color: var(--day10); }
 
   .timeline-time {
-    font-size: 12px;
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 20px;
+    font-size: 15px;
     color: var(--text-muted);
     font-variant-numeric: tabular-nums;
     font-weight: 500;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .timeline-time.important {
+    color: #d32f2f;
+    font-weight: 700;
+  }
+  .timeline-right {
+    grid-column: 2;
+    min-width: 0;
   }
   .timeline-title {
     font-size: 14px;
     font-weight: 600;
-    margin: 2px 0;
+    margin: 0 0 2px;
+    line-height: 1.4;
   }
   .timeline-title a {
     color: inherit;
@@ -550,6 +588,11 @@
     font-size: 13px;
     color: var(--text-secondary);
     line-height: 1.5;
+    margin-top: 2px;
+  }
+  .timeline-desc.important {
+    color: #d32f2f;
+    font-weight: 500;
   }
   .timeline-tag {
     display: inline-block;
@@ -561,6 +604,7 @@
     font-weight: 500;
     margin-top: 4px;
     margin-right: 4px;
+    width: fit-content;
   }
   .timeline-tag.book { background: #fff3e0; color: #e65100; }
   .timeline-tag.free { background: #e8f5e9; color: #2e7d32; }
@@ -570,6 +614,22 @@
     .timeline-tag.book { background: #3d2818; color: #ffb74d; }
     .timeline-tag.free { background: #1b3a1e; color: #81c784; }
     .timeline-tag.warn { background: #3d1f1f; color: #ef9a9a; }
+    .timeline-time.important { color: #ef5350; }
+    .timeline-desc.important { color: #ef5350; }
+  }
+
+  /* ===== 窄屏（手机）时间线紧凑布局：整体左移，减少左侧空白 ===== */
+  @media (max-width: 640px) {
+    .timeline::before {
+      left: 73px;
+    }
+    .timeline-item {
+      grid-template-columns: 60px 1fr;
+      gap: 28px;
+    }
+    .timeline-item::before {
+      left: 68px;
+    }
   }
 
   /* ===== Todo List ===== */
@@ -684,7 +744,7 @@
   <!-- ===== Header ===== -->
   <div class="header">
     <h1>🇮🇸冰岛9日游·旅行手册</h1>
-    <div class="subtitle">6人同行 · 9.24坪山出发 · 芬兰航空</div>
+    <div class="subtitle">2026.9.24（周四）-10.4（周日）· 6人 · 赫尔辛基中转➡️凯夫拉维克落地</div>
   </div>
 
   <!-- ===== Quick Nav ===== -->
@@ -722,7 +782,7 @@
       </div>
     </div>
     <div class="countdown-tz" id="cdTz">冰岛时间 (GMT+0)</div>
-    <div class="countdown-tz" id="cdTzCn" style="margin-top:4px;font-size:12px;opacity:0.8;">北京时间 (GMT+8)</div>
+    <div class="countdown-tz" id="cdTzCn" style="margin-top:4px;font-size:12px;opacity:0.75;">北京时间 (GMT+8)</div>
   </div>
 
   <!-- ===== Map Overview ===== -->
@@ -732,15 +792,39 @@
       <span class="collapse-arrow" id="map-arrow">▼</span>
     </div>
     <div class="map-card" id="map-card">
+      <div class="map-summary">
+        <p>全程以<strong>雷克雅未克</strong>为大本营住8晚，每天参加不同的小团日游出发探索冰岛。9/25抵达后先适应时差，当晚追极光；9/27黄金圈经典路线，9/29斯奈山半岛看"冰岛缩影"，9/30冰岛马骑行体验，10/1南岸+冰河湖长途奔袭。中间穿插自由日可以逛市区、泡温泉、吃美食。去程经赫尔辛基中转飞凯夫拉维克，返程同路线返回香港，全程6人同行。</p>
+      </div>
       <div class="map-svg-container">
         <svg viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg" style="background: var(--map-bg);">
           <defs>
-            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="var(--map-grid)" stroke-width="0.5" opacity="0.6"/>
+            <!-- Tile grid pattern -->
+            <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+              <path d="M 25 0 L 0 0 0 25" fill="none" stroke="var(--map-grid)" stroke-width="0.3" opacity="0.5"/>
             </pattern>
+            <!-- Major grid -->
+            <pattern id="majorGrid" width="100" height="100" patternUnits="userSpaceOnUse">
+              <path d="M 100 0 L 0 0 0 100" fill="none" stroke="var(--map-grid)" stroke-width="0.6" opacity="0.4"/>
+            </pattern>
+            <!-- Soft shadow for markers -->
             <filter id="soft-shadow">
-              <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.2"/>
+              <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.25"/>
             </filter>
+            <!-- Hillshade gradient for highlands -->
+            <radialGradient id="hillshade1" cx="30%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#fff" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#000" stop-opacity="0.08"/>
+            </radialGradient>
+            <radialGradient id="hillshade2" cx="70%" cy="60%" r="60%">
+              <stop offset="0%" stop-color="#fff" stop-opacity="0.1"/>
+              <stop offset="100%" stop-color="#000" stop-opacity="0.06"/>
+            </radialGradient>
+            <!-- Ocean depth gradient -->
+            <radialGradient id="oceanDepth" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stop-color="var(--map-bg)" stop-opacity="1"/>
+              <stop offset="100%" stop-color="var(--map-grid)" stop-opacity="0.3"/>
+            </radialGradient>
+            <!-- Arrow markers -->
             <marker id="arrow-golden" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
               <path d="M 0 0 L 10 5 L 0 10 z" fill="#E8B339"/>
             </marker>
@@ -758,10 +842,12 @@
             </marker>
           </defs>
 
-          <!-- Map grid background -->
+          <!-- Ocean background with subtle depth -->
+          <rect width="500" height="520" fill="url(#oceanDepth)"/>
           <rect width="500" height="520" fill="url(#grid)"/>
+          <rect width="500" height="520" fill="url(#majorGrid)"/>
 
-          <!-- Iceland landmass (navigation map style) -->
+          <!-- ===== ICELAND MAIN LANDMASS ===== -->
           <path d="
             M 140,460
             C 120,440 115,410 120,380
@@ -785,9 +871,21 @@
             C 310,605 285,615 260,610
             C 235,620 205,615 185,600
             C 160,595 145,580 140,460 Z
-          " fill="var(--map-land)" stroke="var(--map-road-border)" stroke-width="1"/>
+          " fill="var(--map-land)" stroke="var(--map-road-border)" stroke-width="1.2"/>
 
-          <!-- Interior highlands (darker green/gray) -->
+          <!-- Coastal indentations / fjords detail -->
+          <path d="
+            M 125,150 Q 135,160 130,175 Q 120,185 128,200
+            M 115,230 Q 125,240 118,255 Q 108,265 115,280
+            M 410,150 Q 420,160 415,175 Q 408,185 415,200
+            M 420,250 Q 430,260 425,275 Q 418,285 425,300
+            M 370,460 Q 380,470 375,485 Q 368,495 375,510
+            M 250,595 Q 260,600 255,610 Q 245,615 250,595
+            M 200,590 Q 210,595 205,605 Q 195,608 200,590
+            M 320,570 Q 330,575 325,585 Q 315,588 320,570
+          " fill="none" stroke="var(--map-road-border)" stroke-width="0.8" opacity="0.6"/>
+
+          <!-- Interior highlands with hillshade -->
           <path d="
             M 180,320
             C 200,280 230,250 270,240
@@ -795,14 +893,60 @@
             C 370,320 360,360 335,380
             C 305,400 260,405 225,390
             C 195,378 175,350 180,320 Z
-          " fill="var(--map-highland)" opacity="0.5"/>
+          " fill="var(--map-highland)" opacity="0.4"/>
+          <path d="
+            M 180,320
+            C 200,280 230,250 270,240
+            C 310,235 345,255 360,290
+            C 370,320 360,360 335,380
+            C 305,400 260,405 225,390
+            C 195,378 175,350 180,320 Z
+          " fill="url(#hillshade1)" opacity="0.6"/>
 
-          <!-- Glacier areas (white patches) -->
-          <ellipse cx="320" cy="310" rx="35" ry="25" fill="var(--map-glacier)" opacity="0.6"/>
-          <ellipse cx="280" cy="280" rx="20" ry="15" fill="var(--map-glacier)" opacity="0.5"/>
-          <ellipse cx="360" cy="340" rx="18" ry="12" fill="var(--map-glacier)" opacity="0.4"/>
+          <!-- Secondary highland area - north -->
+          <ellipse cx="290" cy="180" rx="50" ry="35" fill="var(--map-highland)" opacity="0.3"/>
+          <ellipse cx="290" cy="180" rx="50" ry="35" fill="url(#hillshade2)" opacity="0.5"/>
 
-          <!-- Ring Road (Route 1) - main highway around the island -->
+          <!-- ===== GLACIERS ===== -->
+          <!-- Vatnajökull (largest) -->
+          <ellipse cx="330" cy="295" rx="45" ry="30" fill="var(--map-glacier)" opacity="0.7"/>
+          <ellipse cx="330" cy="295" rx="40" ry="26" fill="var(--map-glacier)" opacity="0.9"/>
+          <!-- Hofsjökull -->
+          <ellipse cx="265" cy="260" rx="22" ry="18" fill="var(--map-glacier)" opacity="0.65"/>
+          <!-- Langjökull -->
+          <ellipse cx="245" cy="220" rx="25" ry="35" fill="var(--map-glacier)" opacity="0.6"/>
+          <!-- Snæfellsjökull -->
+          <ellipse cx="100" cy="285" rx="10" ry="10" fill="var(--map-glacier)" opacity="0.7"/>
+          <!-- Mýrdalsjökull -->
+          <ellipse cx="310" cy="365" rx="18" ry="14" fill="var(--map-glacier)" opacity="0.6"/>
+          <!-- Eyjafjallajökull -->
+          <ellipse cx="295" cy="380" rx="10" ry="8" fill="var(--map-glacier)" opacity="0.55"/>
+
+          <!-- Glacier texture lines -->
+          <path d="M 315,285 Q 325,290 335,285 Q 345,280 350,290" fill="none" stroke="var(--map-highland)" stroke-width="0.8" opacity="0.4"/>
+          <path d="M 320,305 Q 330,300 340,308 Q 350,315 345,325" fill="none" stroke="var(--map-highland)" stroke-width="0.8" opacity="0.35"/>
+
+          <!-- ===== LAKES ===== -->
+          <!-- Þingvallavatn -->
+          <ellipse cx="248" cy="325" rx="12" ry="6" fill="var(--map-bg)" opacity="0.85"/>
+          <ellipse cx="248" cy="325" rx="10" ry="4.5" fill="var(--map-bg)" opacity="0.7"/>
+          <!-- Lake Þórisvatn -->
+          <ellipse cx="285" cy="310" rx="8" ry="4" fill="var(--map-bg)" opacity="0.7"/>
+          <!-- Lake Mývatn -->
+          <ellipse cx="340" cy="155" rx="9" ry="5" fill="var(--map-bg)" opacity="0.7"/>
+          <!-- Lake Hvítárvatn -->
+          <ellipse cx="260" cy="235" rx="6" ry="4" fill="var(--map-bg)" opacity="0.6"/>
+
+          <!-- ===== RIVERS ===== -->
+          <path d="M 250,280 Q 245,300 240,320 Q 235,340 230,360" fill="none" stroke="var(--map-bg)" stroke-width="1.2" opacity="0.7"/>
+          <path d="M 295,350 Q 290,370 285,390 Q 280,410 275,425" fill="none" stroke="var(--map-bg)" stroke-width="1" opacity="0.6"/>
+          <path d="M 340,320 Q 335,345 330,370 Q 325,395 320,420" fill="none" stroke="var(--map-bg)" stroke-width="1.2" opacity="0.65"/>
+          <path d="M 270,160 Q 265,180 260,200 Q 255,220 250,240" fill="none" stroke="var(--map-bg)" stroke-width="0.8" opacity="0.5"/>
+          <path d="M 210,150 Q 205,175 200,200 Q 195,225 190,250" fill="none" stroke="var(--map-bg)" stroke-width="0.8" opacity="0.5"/>
+          <path d="M 180,290 Q 175,310 170,330 Q 165,350 160,370" fill="none" stroke="var(--map-bg)" stroke-width="1" opacity="0.6"/>
+
+          <!-- ===== ROADS ===== -->
+          <!-- Ring Road (Route 1) - main highway - yellow border + white fill like Google Maps -->
           <path d="
             M 195,380
             Q 170,400 155,420
@@ -823,7 +967,7 @@
             Q 115,275 130,305
             Q 150,340 175,360
             Q 190,372 195,380 Z
-          " fill="none" stroke="var(--map-road-border)" stroke-width="4.5"/>
+          " fill="none" stroke="#f9cb3a" stroke-width="5" opacity="0.9"/>
           <path d="
             M 195,380
             Q 170,400 155,420
@@ -844,23 +988,53 @@
             Q 115,275 130,305
             Q 150,340 175,360
             Q 190,372 195,380 Z
-          " fill="none" stroke="var(--map-road)" stroke-width="3"/>
+          " fill="none" stroke="#ffffff" stroke-width="3"/>
+          <!-- Route 1 number markers -->
+          <g transform="translate(155, 485)">
+            <circle r="7" fill="#f9cb3a" stroke="white" stroke-width="1.5"/>
+            <text y="3" text-anchor="middle" font-size="8" fill="#333" font-weight="700">1</text>
+          </g>
+          <g transform="translate(360, 175)">
+            <circle r="7" fill="#f9cb3a" stroke="white" stroke-width="1.5"/>
+            <text y="3" text-anchor="middle" font-size="8" fill="#333" font-weight="700">1</text>
+          </g>
 
-          <!-- Secondary roads (thinner) -->
+          <!-- Secondary roads (thinner white roads) -->
+          <!-- Road to Akureyri / north interior -->
           <path d="M 250,120 Q 270,150 290,180 Q 305,210 310,240" fill="none" stroke="var(--map-road-border)" stroke-width="2.5"/>
           <path d="M 250,120 Q 270,150 290,180 Q 305,210 310,240" fill="none" stroke="var(--map-road)" stroke-width="1.5"/>
+          <!-- Golden Circle route (Road 36 / 35) -->
           <path d="M 195,380 Q 230,355 255,330 Q 275,310 290,290" fill="none" stroke="var(--map-road-border)" stroke-width="2.5"/>
           <path d="M 195,380 Q 230,355 255,330 Q 275,310 290,290" fill="none" stroke="var(--map-road)" stroke-width="1.5"/>
+          <!-- South coast road inland connection -->
           <path d="M 195,380 Q 230,400 270,420 Q 310,435 345,420 Q 375,400 395,370" fill="none" stroke="var(--map-road-border)" stroke-width="2.5"/>
           <path d="M 195,380 Q 230,400 270,420 Q 310,435 345,420 Q 375,400 395,370" fill="none" stroke="var(--map-road)" stroke-width="1.5"/>
+          <!-- Reykjanes peninsula road -->
           <path d="M 175,360 Q 150,375 130,390 Q 110,405 105,425" fill="none" stroke="var(--map-road-border)" stroke-width="2.5"/>
           <path d="M 175,360 Q 150,375 130,390 Q 110,405 105,425" fill="none" stroke="var(--map-road)" stroke-width="1.5"/>
-
           <!-- Snæfellsnes peninsula road -->
           <path d="M 130,305 Q 110,320 95,340 Q 85,365 95,390 Q 110,410 130,415" fill="none" stroke="var(--map-road-border)" stroke-width="2.5"/>
           <path d="M 130,305 Q 110,320 95,340 Q 85,365 95,390 Q 110,410 130,415" fill="none" stroke="var(--map-road)" stroke-width="1.5"/>
+          <!-- Interior highland road (F-road style - dashed) -->
+          <path d="M 270,240 Q 290,260 305,285 Q 315,310 320,335" fill="none" stroke="var(--map-road-border)" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
+          <!-- North coast road to east -->
+          <path d="M 250,120 Q 280,100 320,95 Q 360,95 390,110" fill="none" stroke="var(--map-road-border)" stroke-width="2"/>
+          <path d="M 250,120 Q 280,100 320,95 Q 360,95 390,110" fill="none" stroke="var(--map-road)" stroke-width="1.2"/>
 
-          <!-- ====== DAY TRIP ROUTES (all from Reykjavik, radiating out) ====== -->
+          <!-- ===== PLACE LABELS ===== -->
+          <!-- Major area labels -->
+          <text x="290" y="100" text-anchor="middle" font-size="8" fill="var(--text-muted)" opacity="0.7" font-weight="500">北部</text>
+          <text x="275" y="310" text-anchor="middle" font-size="8" fill="var(--text-muted)" opacity="0.7" font-weight="500">中部高地</text>
+          <text x="345" y="400" text-anchor="middle" font-size="8" fill="var(--text-muted)" opacity="0.7" font-weight="500">南部</text>
+          <text x="95" y="360" text-anchor="middle" font-size="8" fill="var(--text-muted)" opacity="0.7" font-weight="500">斯奈山半岛</text>
+          <text x="145" y="495" text-anchor="middle" font-size="8" fill="var(--text-muted)" opacity="0.7" font-weight="500">雷克janes半岛</text>
+          <text x="400" y="200" text-anchor="middle" font-size="8" fill="var(--text-muted)" opacity="0.7" font-weight="500">东部峡湾</text>
+
+          <!-- Glacier labels -->
+          <text x="330" y="298" text-anchor="middle" font-size="7" fill="#888" opacity="0.8" font-weight="600">瓦特纳冰川</text>
+          <text x="245" y="223" text-anchor="middle" font-size="7" fill="#888" opacity="0.7" font-weight="500">朗格冰川</text>
+
+          <!-- ===== DAY TRIP ROUTES (all from Reykjavik, radiating out) ===== -->
 
           <!-- D3 Golden Circle - 金黄色 - 东偏北 inland -->
           <path class="route-line" stroke="#E8B339" stroke-width="3" d="
@@ -947,30 +1121,59 @@
 
           <!-- Keflavík airport -->
           <circle class="map-location" cx="155" cy="420" r="5" fill="#888" stroke="white" stroke-width="2" filter="url(#soft-shadow)" onclick="openMaps('Keflavík International Airport, Iceland')"/>
-          <text x="135" y="435" text-anchor="middle" font-size="8.5" fill="var(--text-secondary)">✈️ 机场</text>
+          <text x="135" y="435" text-anchor="middle" font-size="8.5" fill="var(--text-secondary)">✈️ 凯夫拉维克机场</text>
 
           <!-- Arrival line from airport -->
           <path class="route-line" stroke="#888" stroke-width="2" stroke-dasharray="4,3" d="M 155,420 Q 170,405 195,390"/>
 
           <!-- Scale bar -->
-          <g transform="translate(20, 490)">
-            <rect x="0" y="0" width="80" height="14" fill="white" rx="2" opacity="0.9"/>
-            <line x1="5" y1="7" x2="25" y2="7" stroke="#333" stroke-width="2"/>
-            <line x1="5" y1="4" x2="5" y2="10" stroke="#333" stroke-width="2"/>
-            <line x1="25" y1="4" x2="25" y2="10" stroke="#333" stroke-width="2"/>
-            <line x1="45" y1="4" x2="45" y2="10" stroke="#333" stroke-width="2"/>
-            <line x1="65" y1="4" x2="65" y2="10" stroke="#333" stroke-width="2"/>
-            <line x1="75" y1="4" x2="75" y2="10" stroke="#333" stroke-width="2"/>
-            <text x="45" y="11" text-anchor="middle" font-size="8" fill="#333" font-weight="600">100 km</text>
+          <g transform="translate(15, 495)">
+            <rect x="0" y="0" width="90" height="22" fill="white" rx="3" opacity="0.92" stroke="#ccc" stroke-width="0.6"/>
+            <!-- Scale segments: black/white alternating bars -->
+            <rect x="6" y="5" width="20" height="6" fill="#333"/>
+            <rect x="26" y="5" width="20" height="6" fill="white" stroke="#333" stroke-width="0.5"/>
+            <rect x="46" y="5" width="20" height="6" fill="#333"/>
+            <rect x="66" y="5" width="20" height="6" fill="white" stroke="#333" stroke-width="0.5"/>
+            <!-- Tick marks below -->
+            <line x1="6" y1="11" x2="6" y2="15" stroke="#333" stroke-width="1"/>
+            <line x1="26" y1="11" x2="26" y2="15" stroke="#333" stroke-width="1"/>
+            <line x1="46" y1="11" x2="46" y2="15" stroke="#333" stroke-width="1"/>
+            <line x1="66" y1="11" x2="66" y2="15" stroke="#333" stroke-width="1"/>
+            <line x1="86" y1="11" x2="86" y2="15" stroke="#333" stroke-width="1"/>
+            <!-- Labels -->
+            <text x="6" y="21" text-anchor="middle" font-size="7" fill="#555" font-weight="500">0</text>
+            <text x="26" y="21" text-anchor="middle" font-size="7" fill="#555" font-weight="500">50</text>
+            <text x="46" y="21" text-anchor="middle" font-size="7" fill="#555" font-weight="500">100</text>
+            <text x="66" y="21" text-anchor="middle" font-size="7" fill="#555" font-weight="500">150</text>
+            <text x="86" y="21" text-anchor="middle" font-size="7" fill="#555" font-weight="500">200</text>
+            <text x="86" y="3" text-anchor="end" font-size="6.5" fill="#777" font-weight="600">km</text>
           </g>
 
           <!-- Compass -->
-          <g transform="translate(460, 30)">
-            <circle cx="0" cy="0" r="16" fill="white" opacity="0.9" stroke="#ccc" stroke-width="1"/>
-            <polygon points="0,-12 4,0 0,12 -4,0" fill="#d4654a" opacity="0.8"/>
-            <polygon points="0,-12 4,0 0,0" fill="#d4654a"/>
-            <text x="0" y="-5" text-anchor="middle" font-size="9" fill="white" font-weight="700">N</text>
+          <g transform="translate(465, 35)">
+            <!-- Outer ring -->
+            <circle cx="0" cy="0" r="20" fill="white" opacity="0.93" stroke="#bbb" stroke-width="0.8"/>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="#ddd" stroke-width="0.5"/>
+            <!-- Cross hairs -->
+            <line x1="0" y1="-20" x2="0" y2="-16" stroke="#999" stroke-width="0.8"/>
+            <line x1="0" y1="16" x2="0" y2="20" stroke="#999" stroke-width="0.8"/>
+            <line x1="-20" y1="0" x2="-16" y2="0" stroke="#999" stroke-width="0.8"/>
+            <line x1="16" y1="0" x2="20" y2="0" stroke="#999" stroke-width="0.8"/>
+            <!-- Needle: north red, south gray -->
+            <polygon points="0,-15 5,0 0,15 -5,0" fill="#999" opacity="0.6"/>
+            <polygon points="0,-15 5,0 0,0" fill="#d32f2f"/>
+            <polygon points="0,15 -5,0 0,0" fill="#666" opacity="0.5"/>
+            <!-- N label inside red part -->
+            <text x="0" y="-4" text-anchor="middle" font-size="9" fill="#d32f2f" font-weight="800" font-family="Arial, sans-serif">N</text>
+            <!-- S label -->
+            <text x="0" y="11" text-anchor="middle" font-size="6.5" fill="#999" font-weight="500">S</text>
+            <!-- E/W labels -->
+            <text x="-11" y="3" text-anchor="middle" font-size="6" fill="#aaa" font-weight="500">W</text>
+            <text x="11" y="3" text-anchor="middle" font-size="6" fill="#aaa" font-weight="500">E</text>
           </g>
+
+          <!-- Map attribution -->
+          <text x="490" y="515" text-anchor="end" font-size="6.5" fill="#999" opacity="0.6">示意图 · 非精确比例</text>
 
         </svg>
       </div>
@@ -1105,18 +1308,6 @@
         <span class="booking-status">已确认</span>
       </div>
 
-      <!-- 赫尔辛基中转 -->
-      <div class="booking-card ticket">
-        <div class="booking-type">🛫 回程中转 · 赫尔辛基</div>
-        <div class="booking-title">9小时35分过夜中转 · 逛吃攻略</div>
-        <div class="booking-detail">
-          <div class="row"><span class="label">时间</span><span>10/3 15:00 到 → 10/4 00:35 飞</span></div>
-          <div class="row"><span class="label">交通</span><span>机场火车到市中心约30分钟，单程5欧左右</span></div>
-          <div class="row"><span class="label">建议</span><span>有申根签可以出机场逛，没有就在机场休息</span></div>
-        </div>
-        <span class="booking-status">已规划</span>
-      </div>
-
     </div>
   </div>
 
@@ -1156,25 +1347,15 @@
             <span class="timeline-tag warn">⏰ 提前出发</span>
           </div>
           <div class="timeline-item">
-            <div class="timeline-time">14:00-15:00</div>
-            <div class="timeline-title"><a href="#" onclick="openMaps('Huanggang Port, Shenzhen, Guangdong, China');return false;">前往皇岗口岸</a></div>
+            <div class="timeline-time">15:30</div>
+            <div class="timeline-title"><a href="#" onclick="openMaps('Huanggang Port, Shenzhen, Guangdong, China');return false;">到达皇岗口岸</a></div>
             <div class="timeline-desc">坪山到皇岗口岸约1小时车程。</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-time">15:00-16:00</div>
-            <div class="timeline-title">过关</div>
-            <div class="timeline-desc">皇岗口岸24小时通关，预留约1小时过关时间。</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-time">16:00</div>
             <div class="timeline-title"><a href="#" onclick="openMaps('Huanggang Port, Shenzhen, Guangdong, China');return false;">永东巴士 · 皇岗口岸上车</a></div>
             <div class="timeline-desc">永东直通巴士直达香港机场，车程约1-1.5小时。上车点在皇岗口岸。</div>
             <span class="timeline-tag">永东巴士</span>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-time">16:00-17:30</div>
-            <div class="timeline-title"><a href="#" onclick="openMaps('Hong Kong International Airport');return false;">永东巴士前往香港机场</a></div>
-            <div class="timeline-desc">直达巴士，不用转车，约1-1.5小时。</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-time">17:30</div>
@@ -1227,11 +1408,6 @@
             <div class="timeline-time">10:00</div>
             <div class="timeline-title"><a href="#" onclick="openMaps('Hofsvallagata 55, 107 Reykjavík, Iceland');return false;">抵达 Airbnb</a></div>
             <div class="timeline-desc">16:00后才能入住，可以先把行李寄存，出去逛逛。</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-time">上午</div>
-            <div class="timeline-title">市区闲逛 · 倒时差</div>
-            <div class="timeline-desc">放下行李后在附近走走，熟悉环境，别安排太满。</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-time">中午</div>
@@ -1802,94 +1978,111 @@
       <span class="collapse-arrow" id="todo-arrow">▼</span>
     </div>
     <div class="todo-list" id="todo-list">
+
       <div class="todo-item done">
         <span class="todo-bullet"></span>
         <div>
-          <div>确认往返机票（芬兰航空）</div>
-          <div class="todo-note">9/25抵达，10/3返程，赫尔辛基中转</div>
+          <div>✅ 已完成：机票、住宿、5个日游团（极光/黄金圈/斯奈山/骑马/南岸）</div>
+          <div class="todo-note">详见上方「已确认预订」板块</div>
         </div>
-      </div>
-      <div class="todo-item done">
-        <span class="todo-bullet"></span>
-        <div>确认住宿（Airbnb · 雷克雅未克8晚）</div>
-        <div class="todo-note">Hofsvallagata 55, 6人，房东Edda</div>
-      </div>
-      <div class="todo-item done">
-        <span class="todo-bullet"></span>
-        <div>确认极光狩猎（Troll · 9/25晚）</div>
-        <div class="todo-note">市政厅22:00接车，小巴团，含热巧克力</div>
-      </div>
-      <div class="todo-item done">
-        <span class="todo-bullet"></span>
-        <div>确认黄金圈日游（Troll · 9/27）</div>
-        <div class="todo-note">市政厅09:00接车，含火山口+蓝瀑布</div>
-      </div>
-      <div class="todo-item done">
-        <span class="todo-bullet"></span>
-        <div>确认斯奈山日游（Nicetravel · 9/29）</div>
-        <div class="todo-note">市政厅08:30接车，6人小团</div>
-      </div>
-      <div class="todo-item done">
-        <span class="todo-bullet"></span>
-        <div>确认冰岛骑马之旅（Eldhestar · 9/30）</div>
-        <div class="todo-note">市政厅08:00接车，Level 1入门级</div>
-      </div>
-      <div class="todo-item done">
-        <span class="todo-bullet"></span>
-        <div>确认南岸冰河湖日游（BusTravel · 10/1）</div>
-        <div class="todo-note">市政厅07:00接车，早出晚归，车程长</div>
       </div>
 
       <div class="todo-item done">
         <span class="todo-bullet"></span>
-        <div>办理冰岛签证（申根签）</div>
-        <div class="todo-note">已完成 ✅</div>
+        <div>
+          <div>办理冰岛签证（申根签）</div>
+          <div class="todo-note">已完成 ✅</div>
+        </div>
       </div>
       <div class="todo-item done">
         <span class="todo-bullet"></span>
-        <div>购买旅行保险</div>
-        <div class="todo-note">已完成 ✅</div>
+        <div>
+          <div>购买旅行保险</div>
+          <div class="todo-note">已完成 ✅</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>
+          <div>🧥 衣物装备：防水冲锋衣 + 防水裤</div>
+          <div class="todo-note">冰岛天气说变就变，防水是第一要务</div>
+        </div>
       </div>
       <div class="todo-item">
         <span class="todo-bullet"></span>
-        <div>换冰岛克朗或准备全币种信用卡</div>
-        <div class="todo-note">冰岛基本刷卡全覆盖，但少量现金备用</div>
+        <div>
+          <div>🧥 衣物装备：登山鞋/防水徒步鞋</div>
+          <div class="todo-note">瀑布、黑沙滩地面湿滑，防水防滑必备</div>
+        </div>
       </div>
       <div class="todo-item">
         <span class="todo-bullet"></span>
-        <div>下载离线地图（Google Maps / Maps.me）</div>
-        <div class="todo-note">东部峡湾很多地方没信号</div>
+        <div>
+          <div>🧥 衣物装备：墨镜、防晒霜</div>
+          <div class="todo-note">冰岛紫外线强，冰川反光更刺眼</div>
+        </div>
       </div>
       <div class="todo-item">
         <span class="todo-bullet"></span>
-        <div>准备防水外套和登山鞋</div>
-        <div class="todo-note">冰岛天气说变就变，防水是第一要务</div>
+        <div>
+          <div>🧥 衣物装备：保温杯、防风口罩、手套</div>
+          <div class="todo-note">户外风大又冷，保温杯装热水，防风口罩和手套必备</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>
+          <div>🔌 电子通讯：转换插头（欧标两圆孔 Type F）</div>
+          <div class="todo-note">冰岛和芬兰都是欧标</div>
+        </div>
       </div>
       <div class="todo-item">
         <span class="todo-bullet"></span>
-        <div>🧤 物品类：保温杯、防风口罩、手套</div>
-        <div class="todo-note">户外风大又冷，保温杯装热水，防风口罩和手套必备</div>
+        <div>
+          <div>🔌 电子通讯：充电宝、相机、三脚架</div>
+          <div class="todo-note">野外信号差很耗电；三脚架拍极光长曝光用</div>
+        </div>
       </div>
       <div class="todo-item">
         <span class="todo-bullet"></span>
-        <div>🍜 食材类：泡面、鲜米饭、预制菜、零食</div>
-        <div class="todo-note">冰岛物价高且口味不习惯，带点吃的应急和解馋，民宿有厨房可以加热</div>
+        <div>
+          <div>🔌 电子通讯：买欧洲电话卡或开通国际漫游</div>
+          <div class="todo-note">跟团也需要网络查信息、联系导游</div>
+        </div>
       </div>
       <div class="todo-item">
         <span class="todo-bullet"></span>
-        <div>买欧洲电话卡或开通国际漫游</div>
-        <div class="todo-note">跟团也需要网络查信息、联系导游</div>
+        <div>
+          <div>🔌 电子通讯：下载离线地图（Google Maps / Maps.me）</div>
+          <div class="todo-note">东部峡湾很多地方没信号</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <span class="todo-bullet"></span>
+        <div>
+          <div>🍜 食品物资：泡面、鲜米饭、预制菜、零食</div>
+          <div class="todo-note">冰岛物价高且口味不习惯，带点吃的应急和解馋，民宿有厨房可以加热</div>
+        </div>
       </div>
       <div class="todo-item">
         <span class="todo-bullet"></span>
-        <div>赫尔辛基中转：确认是否有申根签</div>
-        <div class="todo-note">有申根签可以出机场逛赫尔辛基，没有就只能在机场休息</div>
+        <div>
+          <div>🍜 食品物资：换冰岛克朗或准备全币种信用卡</div>
+          <div class="todo-note">冰岛基本刷卡全覆盖，但少量现金备用</div>
+        </div>
       </div>
+
       <div class="todo-item">
         <span class="todo-bullet"></span>
-        <div>转换插头（欧标两圆孔 Type F）</div>
-        <div class="todo-note">冰岛和芬兰都是欧标</div>
+        <div>
+          <div>🛫 行前确认：赫尔辛基中转是否有申根签</div>
+          <div class="todo-note">有申根签可以出机场逛赫尔辛基，没有就只能在机场休息</div>
+        </div>
       </div>
+    
     </div>
   </div>
 
@@ -1984,17 +2177,6 @@
         • 冰川徒步必须跟向导，不要自己走上去<br>
         • 泡温泉前先洗澡裸冲，这是冰岛规定<br>
         • 下载112 Iceland APP，可以一键定位求助</p>
-      </div>
-
-      <div class="tip-card">
-        <h4>🎒 打包清单</h4>
-        <p>• 防水冲锋衣 + 防水裤（必备！）<br>
-        • 登山鞋/防水徒步鞋<br>
-        • 泳衣（蓝湖、米湖温泉用）<br>
-        • 墨镜、防晒霜（夏季极昼，紫外线强）<br>
-        • 转换插头：欧标两圆孔（Type F）<br>
-        • 车载手机支架（导航用）<br>
-        • 充电宝、相机、三脚架（拍极光用）</p>
       </div>
 
     </div>
@@ -2110,13 +2292,19 @@ function openMaps(query) {
   const encoded = encodeURIComponent(query);
   // 检测是否移动设备
   const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  
   if (isMobile) {
-    // 尝试唤起App
-    window.location.href = `comgooglemaps://?q=${encoded}`;
-    // 如果App没打开，回退到网页版
-    setTimeout(() => {
-      window.location.href = `https://www.google.com/maps/search/?api=1&query=${encoded}`;
-    }, 500);
+    // 优先用 Google Maps 通用深度链接（iOS/Android 都能唤起App）
+    const appUrl = `https://www.google.com/maps/search/?api=1&query=${encoded}`;
+    window.location.href = appUrl;
+    
+    // iOS 额外尝试 comgooglemaps 协议
+    if (isIOS) {
+      setTimeout(() => {
+        window.location.href = `comgooglemaps://?q=${encoded}`;
+      }, 200);
+    }
   } else {
     window.open(`https://www.google.com/maps/search/?api=1&query=${encoded}`, '_blank');
   }
@@ -2126,35 +2314,38 @@ function openMapsDirections(waypoints) {
   if (!waypoints || waypoints.length < 2) return;
   const origin = encodeURIComponent(waypoints[0]);
   const destination = encodeURIComponent(waypoints[waypoints.length - 1]);
-  let url;
-
+  
   const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  
+  // 构建网页版导航URL（也是通用深度链接，手机上能唤起App）
+  let webUrl;
   if (waypoints.length === 2) {
-    if (isMobile) {
-      url = `comgooglemaps://?saddr=${origin}&daddr=${destination}&directionsmode=driving`;
-    } else {
-      url = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
-    }
+    webUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
   } else {
     const middle = waypoints.slice(1, -1).map(w => encodeURIComponent(w)).join('|');
-    if (isMobile) {
-      // 移动版多点导航
-      url = `comgooglemaps://?saddr=${origin}&daddr=${destination}&waypoints=${middle}&directionsmode=driving`;
-    } else {
-      url = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&waypoints=${middle}&travelmode=driving`;
-    }
+    webUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&waypoints=${middle}&travelmode=driving`;
   }
 
   if (isMobile) {
-    window.location.href = url;
-    setTimeout(() => {
-      // 回退到网页版
-      const webUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
-      window.location.href = webUrl;
-    }, 500);
+    // 优先用 https 深度链接（iOS/Android 的Google Maps App都能识别并唤起）
+    window.location.href = webUrl;
+    
+    // iOS 额外尝试 comgooglemaps 协议作为备选
+    if (isIOS) {
+      let appUrl;
+      if (waypoints.length === 2) {
+        appUrl = `comgooglemaps://?saddr=${origin}&daddr=${destination}&directionsmode=driving`;
+      } else {
+        const middle = waypoints.slice(1, -1).map(w => encodeURIComponent(w)).join('|');
+        appUrl = `comgooglemaps://?saddr=${origin}&daddr=${destination}&waypoints=${middle}&directionsmode=driving`;
+      }
+      setTimeout(() => {
+        window.location.href = appUrl;
+      }, 200);
+    }
   } else {
-    window.open(url, '_blank');
+    window.open(webUrl, '_blank');
   }
   return false;
 }
@@ -2293,6 +2484,34 @@ function updateItineraryHeight() {
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('day0').classList.add('expanded');
   document.getElementById('day1').classList.add('expanded');
+
+  // 将 timeline-item 中标题/描述/标签包裹进 .timeline-right
+  document.querySelectorAll('.timeline-item').forEach(item => {
+    const time = item.querySelector('.timeline-time');
+    const children = Array.from(item.children).filter(c => c !== time);
+    if (children.length > 0) {
+      const right = document.createElement('div');
+      right.className = 'timeline-right';
+      children.forEach(c => right.appendChild(c));
+      item.appendChild(right);
+    }
+  });
+
+  // 只标红"到达接车点"和"登机/起飞"时间
+  const importantKeywords = ['到达接车点', '起飞', '登机'];
+  document.querySelectorAll('.timeline-item').forEach(item => {
+    const time = item.querySelector('.timeline-time');
+    const title = item.querySelector('.timeline-title');
+    const titleText = title ? title.textContent : '';
+
+    for (const keyword of importantKeywords) {
+      if (titleText.includes(keyword)) {
+        if (time) time.classList.add('important');
+        break;
+      }
+    }
+  });
+
   // 设置预订板块初始高度
   const grid = document.getElementById('bookings-grid');
   if (grid) {
